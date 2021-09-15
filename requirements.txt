@@ -17,4 +17,3 @@ soupsieve
 typing-extensions
 urllib3
 yarl
-setup.py
