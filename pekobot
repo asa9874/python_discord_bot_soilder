@@ -40,6 +40,6 @@ async def 명령어(ctx):
     await ctx.send(embed = embed)
 
 
-bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.WMB-PvQt5yDiCx5mlAd1WCq3AaQ')
+bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
 
 
