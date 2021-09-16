@@ -43,18 +43,25 @@ async def search(ctx,text):
     Rank_win=soup.find("span", attrs={"class":"wins"}).get_text()
     Rank_lose=soup.find("span", attrs={"class":"losses"}).get_text()
     Rank_winrate=soup.find("span", attrs={"class":"winratio"}).get_text()
-
+    
+    Recent_game=soup.find("div", attrs={"class":"GameResult"}).get_text()
+    Recent_time=soup.find("div", attrs={"class":"GameLength"}).get_text()
+    Recent_kill=soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.RealContent > div > div.Content > div.GameItemList > div:nth-child(1) > div > div.Content > div.KDA > div.KDA > span.Kill").text
+    Recent_death=soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.RealContent > div > div.Content > div.GameItemList > div:nth-child(1) > div > div.Content > div.KDA > div.KDA > span.Death").text
+    Recent_assist=soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.RealContent > div > div.Content > div.GameItemList > div:nth-child(1) > div > div.Content > div.KDA > div.KDA > span.Assist").text
+    Recent_champ=soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.RealContent > div > div.Content > div.GameItemList > div:nth-child(1) > div > div.Content > div.GameSettingInfo > div.ChampionName > a").text
 
     embed = discord.Embed(title = text+"의 랭크",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Rank_img)
     embed.add_field(name = Rank_text, value = Rank_point)
-    embed.add_field(name = Rank_win+"/"+Rank_lose, value = Rank_winrate)
+    embed.add_field(name = Rank_win+"/"+Rank_lose, value = Rank_winrate,inline=False)
+    embed.add_field(name ="최근 전적"+Recent_game+"시간:"+Recent_time, value = "챔프:"+Recent_champ+"___킬뎃:"+Recent_kill+"킬/"+Recent_death+"데스/"+Recent_assist+"어시")
     await ctx.send(embed = embed)
 
 
 
-@bot.command(aliases=['코로나','코로나확진자','확진자수','코로나 확진자','코라나수'])
+@bot.command(aliases=['코로나','코로나확진자','확진자수','코로나 확진자','코로나수'])
 async def covid(ctx):
     url='http://ncov.mohw.go.kr/bdBoardList_Real.do'
     page = requests.get(url)
@@ -100,7 +107,6 @@ async def on_command_error(ctx, error):
         description = "", color = 0x62c1cc)
         embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
         await ctx.send(embed = embed)
-
 
 
 
