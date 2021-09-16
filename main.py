@@ -30,7 +30,7 @@ async def introduce(ctx):
 
 
 
-@bot.command(aliases=['랭크','랭킹','롤 랭크'])
+@bot.command(aliases=['랭크','랭킹','롤 랭크','티어','롤티어'])
 async def search(ctx,text):
     url=(f'https://www.op.gg/summoner/userName='+text)
     page = requests.get(url)
@@ -46,13 +46,6 @@ async def search(ctx,text):
     embed.add_field(name = Rank_text, value = Rank_point)
 
     await ctx.send(embed = embed)
-
-
-
-
-
-
-
 
 
 
