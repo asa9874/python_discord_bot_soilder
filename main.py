@@ -4,7 +4,7 @@ import random
 import requests
 from bs4 import BeautifulSoup
 
-game= discord.Game("콘페코")
+game= discord.Game("!명령어")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -24,9 +24,56 @@ async def pekomiko(ctx):
 async def introduce(ctx):
     await ctx.send(f'こんぺこ、こんぺこ、こんぺこ！ホロライブ三期生の兎田ぺこらぺこ！どうも、どうも！\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
 
-@bot.command(aliases=['검색','전적','전적검색'])
+
+
+
+
+
+
+@bot.command(aliases=['랭크','랭킹','롤 랭크'])
 async def search(ctx,text):
-    await ctx.send(f'https://www.op.gg/summoner/userName='+text)
+    url=(f'https://www.op.gg/summoner/userName='+text)
+    page = requests.get(url)
+    opgg_soup = BeautifulSoup(page.content, "html.parser")
+
+    Rank_img=opgg_soup.find("div", attrs={"class":"SummonerRatingMedium"}).find("img").get('src')
+    Rank_text=opgg_soup.find("div", attrs={"class":"TierRank"}).get_text()
+    Rank_point=opgg_soup.find("span", attrs={"class":"LeaguePoints"}).get_text()
+
+    embed = discord.Embed(title = text+"의 랭크",
+    description = "", color = 0x62c1cc)
+    embed.set_thumbnail(url="http:" + Rank_img)
+    embed.add_field(name = Rank_text, value = Rank_point)
+
+    await ctx.send(embed = embed)
+
+
+
+
+
+
+
+
+
+
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        embed = discord.Embed(title = "무슨소리인지 모르겠는페코",
+        description = "", color = 0x62c1cc)
+        embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
+        await ctx.send(embed = embed)
+
+
+
+
+
+
+
+
+
+
 
 @bot.command()
 async def 명령어(ctx):
@@ -36,9 +83,8 @@ async def 명령어(ctx):
     embed.add_field(name = "!병신", value = "병신페코")
     embed.add_field(name = "!페코미코", value = "페코미코!")
     embed.add_field(name = "!자기소개", value = "페코라의 자기소개")
-    embed.add_field(name = "!전잭 (이름)", value = "전적검색")
+    embed.add_field(name = "!랭크 (이름)", value = "랭크검색")
     await ctx.send(embed = embed)
-
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
 
