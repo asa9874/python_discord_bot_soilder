@@ -32,6 +32,7 @@ async def introduce(ctx):
 
 @bot.command(aliases=['랭크','랭킹','롤 랭크','티어','롤티어'])
 async def search(ctx,text):
+    print(text)
     url=(f'https://www.op.gg/summoner/userName='+text)
     page = requests.get(url)
     soup = BeautifulSoup(page.content, "html.parser")
@@ -47,11 +48,44 @@ async def search(ctx,text):
     embed = discord.Embed(title = text+"의 랭크",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Rank_img)
-    embed.set_thumbnail(url="http:" + Rank_img)
     embed.add_field(name = Rank_text, value = Rank_point)
     embed.add_field(name = Rank_win+"/"+Rank_lose, value = Rank_winrate)
     await ctx.send(embed = embed)
 
+
+
+@bot.command(aliases=['코로나','코로나확진자','확진자수','코로나 확진자','코라나수'])
+async def covid(ctx):
+    url='http://ncov.mohw.go.kr/bdBoardList_Real.do'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+
+
+    num =soup.find("p", attrs={"class":"inner_value"}).get_text()
+    total=soup.find("dd", attrs={"class":"ca_value"}).get_text()
+    time=soup.find("span", attrs={"class":"t_date"}).get_text()
+
+    embed = discord.Embed(title = "코로나 확진자"+time,
+    description = "", color = 0x62c1cc)
+    embed.add_field(name = "총 확진자:"+total, value ="오늘:"+num)
+    await ctx.send(embed = embed)
+
+
+
+
+
+
+@bot.command()
+async def 명령어(ctx):
+    embed = discord.Embed(title = "현재있는 명령어 목록",
+    description = "", color = 0x62c1cc)
+    embed.add_field(name = "!콘페코", value = "인사",inline=False)
+    embed.add_field(name = "!병신", value = "병신페코",inline=False)
+    embed.add_field(name = "!페코미코", value = "페코미코!",inline=False)
+    embed.add_field(name = "!자기소개", value = "페코라의 자기소개",inline=False)
+    embed.add_field(name = "!티어 (이름)", value = "랭크 검색",inline=False)
+    embed.add_field(name = "!코로나", value = "코로나 정보 보기.",inline=False)
+    await ctx.send(embed = embed)
 
 
 
@@ -69,20 +103,6 @@ async def on_command_error(ctx, error):
 
 
 
-
-
-
-
-@bot.command()
-async def 명령어(ctx):
-    embed = discord.Embed(title = "현재있는 명령어 목록",
-    description = "", color = 0x62c1cc)
-    embed.add_field(name = "!콘페코", value = "인사")
-    embed.add_field(name = "!병신", value = "병신페코")
-    embed.add_field(name = "!페코미코", value = "페코미코!")
-    embed.add_field(name = "!자기소개", value = "페코라의 자기소개")
-    embed.add_field(name = "!랭크 (이름)", value = "랭크검색")
-    await ctx.send(embed = embed)
 
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
