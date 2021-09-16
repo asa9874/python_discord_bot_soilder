@@ -34,18 +34,27 @@ async def introduce(ctx):
 async def search(ctx,text):
     url=(f'https://www.op.gg/summoner/userName='+text)
     page = requests.get(url)
-    opgg_soup = BeautifulSoup(page.content, "html.parser")
+    soup = BeautifulSoup(page.content, "html.parser")
 
-    Rank_img=opgg_soup.find("div", attrs={"class":"SummonerRatingMedium"}).find("img").get('src')
-    Rank_text=opgg_soup.find("div", attrs={"class":"TierRank"}).get_text()
-    Rank_point=opgg_soup.find("span", attrs={"class":"LeaguePoints"}).get_text()
+    Rank_img=soup.find("div", attrs={"class":"SummonerRatingMedium"}).find("img").get('src')
+    Rank_text=soup.find("div", attrs={"class":"TierRank"}).get_text()
+    Rank_point=soup.find("span", attrs={"class":"LeaguePoints"}).get_text()
+    Rank_win=soup.find("span", attrs={"class":"wins"}).get_text()
+    Rank_lose=soup.find("span", attrs={"class":"losses"}).get_text()
+    Rank_winrate=soup.find("span", attrs={"class":"winratio"}).get_text()
+
 
     embed = discord.Embed(title = text+"의 랭크",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Rank_img)
+    embed.set_thumbnail(url="http:" + Rank_img)
     embed.add_field(name = Rank_text, value = Rank_point)
-
+    embed.add_field(name = Rank_win+"/"+Rank_lose, value = Rank_winrate)
     await ctx.send(embed = embed)
+
+
+
+
 
 
 
@@ -64,10 +73,6 @@ async def on_command_error(ctx, error):
 
 
 
-
-
-
-
 @bot.command()
 async def 명령어(ctx):
     embed = discord.Embed(title = "현재있는 명령어 목록",
@@ -78,6 +83,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!자기소개", value = "페코라의 자기소개")
     embed.add_field(name = "!랭크 (이름)", value = "랭크검색")
     await ctx.send(embed = embed)
+
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
 
