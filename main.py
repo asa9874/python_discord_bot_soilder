@@ -104,7 +104,7 @@ async def covid(ctx):
     await ctx.send(embed = embed)
 
 
-@bot.command('온도')
+@bot.command()
 async def 날씨(ctx,text):
 
 
@@ -115,6 +115,13 @@ async def 날씨(ctx,text):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     
     Weather_tem=soup.select_one('#ArchTemp > span.t_0').text
+
+
+
+    embed = discord.Embed(title = text+"의 날씨",
+    description = "", color = 0x62c1cc)
+    embed.add_field(name =  "온도:"+Weather_tem, value ="츄츄")
+    await ctx.send(embed = embed)
 
 
 
