@@ -107,13 +107,6 @@ async def covid(ctx):
 
 @bot.command()
 async def 날씨(ctx,text):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-gpu")
-    chrome_options.add_argument("--no-sandbox")
-
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
