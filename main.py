@@ -3,6 +3,20 @@ from discord.ext import commands
 import random
 import requests
 from bs4 import BeautifulSoup
+import selenium
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.support.ui import WebDriverWait
+
+
+
+
 
 game= discord.Game("!명령어")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
@@ -76,6 +90,35 @@ async def covid(ctx):
     description = "", color = 0x62c1cc)
     embed.add_field(name = "총 확진자:"+total, value ="오늘:"+num)
     await ctx.send(embed = embed)
+
+
+
+@bot.command()
+async def 날씨(ctx,text):
+    url=(f'https://www.google.com/search?q='+text+'날씨')
+    driver=webdriver.Chrome()
+    driver.get(url)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    Weather_img=soup.select_one('#wob_tci')['src']
+    Weather_tem=soup.select_one('#wob_tm').text
+    Weather_rain=soup.select_one('#wob_pp').text
+
+
+
+
+
+
+
+
+
+    embed = discord.Embed(title = text+"의 날씨",
+    description = "", color = 0x62c1cc)
+    embed.set_thumbnail(url="http:" +Weather_img)
+    embed.add_field(name =  "온도:"+Weather_tem, value = "비올확률:"+Weather_rain)
+    await ctx.send(embed = embed)
+
+
 
 
 
