@@ -115,11 +115,16 @@ async def 날씨(ctx,text):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     Weather_img=soup.select_one('#wob_tci')['src']
-    Weather_tem=soup.select_one('#wob_dp > div.wob_df.wob_ds > div.wNE31c > div.gNCp2e > span:nth-child(1)').text
     Weather_rain=soup.select_one('#wob_pp').text
     Weather_water=soup.select_one('#wob_hm').text
 
+    url2=(f'https://rp5.ru/'+text+'의_날씨')
+    driver=webdriver.Chrome()
+    driver.get(url2)
 
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    Weather_tem=soup.select_one('#ArchTemp > span.t_0').text
 
 
 
