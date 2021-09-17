@@ -17,12 +17,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
-chrome_options = webdriver.ChromeOptions()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--no-sandbox")
 
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 
 
 
@@ -112,6 +107,15 @@ async def covid(ctx):
 
 @bot.command()
 async def 날씨(ctx,text):
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-gpu")
+    chrome_options.add_argument("--no-sandbox")
+
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+
+
+
     url=(f'https://www.google.com/search?q='+text+'날씨')
     driver=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get(url)
@@ -167,6 +171,8 @@ async def on_command_error(ctx, error):
         description = "", color = 0x62c1cc)
         embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
         await ctx.send(embed = embed)
+
+
 
 
 
