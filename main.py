@@ -117,7 +117,7 @@ async def 날씨(ctx,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -171,7 +171,6 @@ async def on_command_error(ctx, error):
         description = "", color = 0x62c1cc)
         embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
         await ctx.send(embed = embed)
-
 
 
 
