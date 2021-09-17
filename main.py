@@ -104,27 +104,25 @@ async def covid(ctx):
     await ctx.send(embed = embed)
 
 
-
-@bot.command()
+@bot.command('온도')
 async def 날씨(ctx,text):
 
 
-    url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
-    driver.get(url)
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-    Weather_img=soup.select_one('#wob_tci')['src']
-    Weather_rain=soup.select_one('#wob_pp').text
-    Weather_water=soup.select_one('#wob_hm').text
-
-    url2=(f'https://rp5.ru/'+text+'의_날씨')
+    url=(f'https://rp5.ru/'+text+'의_날씨')
     driver=webdriver.Chrome()
-    driver.get(url2)
+    driver.get(url)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-
+    
     Weather_tem=soup.select_one('#ArchTemp > span.t_0').text
+
+
+
+    embed = discord.Embed(title = text+"의 날씨",
+    description = "", color = 0x62c1cc)
+    embed.add_field(name =  "온도:"+Weather_tem, value =츄츄)
+    await ctx.send(embed = embed)
+
 
 
 
