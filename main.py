@@ -115,7 +115,7 @@ async def 날씨(ctx,text):
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     Weather_img=soup.select_one('#wob_tci')['src']
-    Weather_tem=soup.select_one('#wob_tm').text
+    Weather_tem=soup.select_one('#wob_dp > div.wob_df.wob_ds > div.wNE31c > div.gNCp2e > span:nth-child(1)').text
     Weather_rain=soup.select_one('#wob_pp').text
     Weather_water=soup.select_one('#wob_hm').text
 
