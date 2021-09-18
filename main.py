@@ -5,7 +5,6 @@ import requests
 from bs4 import BeautifulSoup
 import os
 
-
 import selenium
 from selenium import webdriver
 from selenium.webdriver import ActionChains
@@ -19,13 +18,21 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 
-game= discord.Game("!명령어")
-bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
-
 #executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
 
 
+
+game= discord.Game("버전 1.5v 페코라봇")
+bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
+
+
+
+
+
+
+
 #잡다한 말들
+
 @bot.command(aliases=['콘페코','안녕','반가워','하이','konpeko','안뇽','오하요'])
 async def hello(ctx):
     await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
@@ -61,7 +68,9 @@ async def stop(ctx):
 
 
 
+
 #롤 검색
+
 @bot.command(aliases=['랭크','랭킹','롤 랭크','티어','롤티어'])
 async def search(ctx,text):
     print(text)
@@ -92,6 +101,8 @@ async def search(ctx,text):
     await ctx.send(embed = embed)
 
 
+
+
 #코로나
 @bot.command(aliases=['코로나','코로나확진자','확진자수','코로나 확진자','코로나수'])
 async def covid(ctx):
@@ -109,6 +120,7 @@ async def covid(ctx):
     embed.add_field(name = "총 확진자:"+total, value ="오늘:"+num)
     await ctx.send(embed = embed)
 
+
 #날씨
 @bot.command()
 async def 날씨(ctx,text):
@@ -119,7 +131,7 @@ async def 날씨(ctx,text):
     driver.get(url)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-
+    
     Weather_img=soup.select_one('#wob_tci')['src']
     Weather_rain=soup.select_one('#wob_pp').text
     Weather_water=soup.select_one('#wob_hm').text
@@ -138,8 +150,6 @@ async def 날씨(ctx,text):
 
 
 
-
-
 #명령어 목록 알려주기
 @bot.command()
 async def 명령어(ctx):
@@ -151,6 +161,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!자기소개", value = "페코라의 자기소개",inline=False)
     embed.add_field(name = "!티어 (이름)", value = "랭크 검색",inline=False)
     embed.add_field(name = "!코로나", value = "코로나 정보 보기.",inline=False)
+    embed.add_field(name = "!날씨", value = "날씨 정보 보기",inline=False)
     await ctx.send(embed = embed)
 
 
@@ -167,10 +178,24 @@ async def on_command_error(ctx, error):
         embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
         await ctx.send(embed = embed)
 
+@bot.event
+async def on_message_delete(message):
 
+    embed = discord.Embed(title = "탐정왓슨이 삭제된 메세지를 찾았습니다.",
+    description = "", color = 15844367)
+    embed.set_thumbnail(url="https://w.namu.la/s/2a901aac58e0a8898cfb238dd859af4dc55f9b24e79f0006f7aa7523222b8426433aa57f0a3ce14cc6f6d3f47796299075d2700271096ebb9599b32ca895666cc3cc58dd40d33297a0f34e91f2164e833ae044ca40f5985c5ce1cbacf903eb32")
+    embed.add_field(name =  "삭제한사람:"+ str(message.author), value ="메세지:"+message.content)
+    await message.channel.send(embed=embed)
+    return
 
-
-
+@bot.event
+async def on_message_edit(before, after):
+    embed = discord.Embed(title = "탐정왓슨이 수정된 메세지를 찾았습니다.",
+    description = "", color = 15844367)
+    embed.set_thumbnail(url="https://w.namu.la/s/2a901aac58e0a8898cfb238dd859af4dc55f9b24e79f0006f7aa7523222b8426433aa57f0a3ce14cc6f6d3f47796299075d2700271096ebb9599b32ca895666cc3cc58dd40d33297a0f34e91f2164e833ae044ca40f5985c5ce1cbacf903eb32")
+    embed.add_field(name =  "원본 메세지:"+before.content, value ="바뀐 메세지:"+after.content)
+    await before.channel.send(embed=embed)
+    return
 
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
