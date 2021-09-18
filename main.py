@@ -19,21 +19,13 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 
-
-
-
-
-
-
-
-
 game= discord.Game("!명령어")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
+#executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
 
 
-
-
+#잡다한 말들
 @bot.command(aliases=['콘페코','안녕','반가워','하이','konpeko','안뇽','오하요'])
 async def hello(ctx):
     await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
@@ -50,12 +42,26 @@ async def pekomiko(ctx):
 async def introduce(ctx):
     await ctx.send(f'こんぺこ、こんぺこ、こんぺこ！ホロライブ三期生の兎田ぺこらぺこ！どうも、どうも！\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
 
+@bot.command(aliases=['닥쳐','시발',])
+async def 아가리(ctx):
+    await ctx.send(f'말이 너무심해')
+
+@bot.command(aliases=['야한거',])
+async def 섹스(ctx):
+    await ctx.send(f'야한건 안되')
+   
+@bot.command(aliases=['디버그'])
+async def debug(ctx):
+    await ctx.send(f'페코라는 프로그램이 아니야')
+    
+@bot.command(aliases=['멈춰'])
+async def stop(ctx):
+    await ctx.send(f'24시간 영원히 살아가')
 
 
 
 
-
-
+#롤 검색
 @bot.command(aliases=['랭크','랭킹','롤 랭크','티어','롤티어'])
 async def search(ctx,text):
     print(text)
@@ -86,7 +92,7 @@ async def search(ctx,text):
     await ctx.send(embed = embed)
 
 
-
+#코로나
 @bot.command(aliases=['코로나','코로나확진자','확진자수','코로나 확진자','코로나수'])
 async def covid(ctx):
     url='http://ncov.mohw.go.kr/bdBoardList_Real.do'
@@ -103,7 +109,7 @@ async def covid(ctx):
     embed.add_field(name = "총 확진자:"+total, value ="오늘:"+num)
     await ctx.send(embed = embed)
 
-
+#날씨
 @bot.command()
 async def 날씨(ctx,text):
 
@@ -134,7 +140,7 @@ async def 날씨(ctx,text):
 
 
 
-
+#명령어 목록 알려주기
 @bot.command()
 async def 명령어(ctx):
     embed = discord.Embed(title = "현재있는 명령어 목록",
@@ -152,7 +158,7 @@ async def 명령어(ctx):
 
 
 
-
+#이벤트목록
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
