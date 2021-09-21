@@ -67,8 +67,8 @@ async def stop(ctx):
 
 @bot.command(aliases=['네네치'])
 async def 슈퍼네네치(ctx):
-    await message.channel.send(f'슈퍼 네네치~')
-    await message.channel.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
+    await ctx.send(f'슈퍼 네네치~')
+    await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 
 
