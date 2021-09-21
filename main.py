@@ -75,17 +75,37 @@ async def 슈퍼네네치(ctx):
 
 
 #hololive 구독자
-@bot.command(aliases=['hololive'])
-async def 홀로라이브(ctx):
-    url='https://trackholo.live/en/'
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
+@bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
+async def 홀로라이브(ctx,text):
+    url=(f'https://trackholo.live/en/')
+    driver=webdriver.Chrome()
+    driver.get(url)
+
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    text=int(text)
 
 
+    name=soup.findAll("span", attrs={"style":"padding-left: 25px"})
+    number=soup.findAll("a", attrs={"class":"py-3 px-2"})
 
-    name=soup.select_one('#latest > table > tbody > tr:nth-child(1) > td.col-9.col-md-3.col-xl-3.name.p-0.d-none.d-inline-block.name-cut > a.py-3.pl-3 > span').text
-    print(name)
-    await ctx.send(name)
+    for i in name:
+        print(i.getText())
+        
+    for j in number:
+        print(j.getText())
+
+    embed = discord.Embed(title = "홀로라이브구독자",
+    description = "", color = 3066993)
+    for i in range(len(name)):
+        embed.add_field(name =  "유튜버:"+name[i].getText(), value = str(i+1)+"등 구독자:"+number[1+4*i].getText(),inline=False)
+    await ctx.send(embed = embed)
+    
+    embed = discord.Embed(title = "홀로라이브구독자",
+    description = "", color = 3066993)
+    for i in range(len(name)-25):
+        embed.add_field(name =  "유튜버:"+name[i+25].getText(), value = str(i+26)+"등 구독자:"+number[1+4*i+24].getText(),inline=False)
+    await ctx.send(embed = embed)
 
 
 
@@ -103,7 +123,7 @@ async def 나무위키(ctx,*,text):
     url=(f'https://namu.wiki/w/'+text)
 
 
-    driver=webdriver.Chrome()
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     try:
