@@ -22,7 +22,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 
-game= discord.Game("버전 1.787v 페코라봇")
+game= discord.Game("버전 1.78v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -74,35 +74,56 @@ async def 슈퍼네네치(ctx):
 
 
 
+#hololive 구독자
+@bot.command(aliases=['hololive'])
+async def 홀로라이브(ctx):
+    url='https://trackholo.live/en/'
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+
+
+
+    name=soup.select_one('#latest > table > tbody > tr:nth-child(1) > td.col-9.col-md-3.col-xl-3.name.p-0.d-none.d-inline-block.name-cut > a.py-3.pl-3 > span').text
+    print(name)
+    await ctx.send(name)
+
+
+
+
+
+
+
+
 
 
 #나무위키
-#@bot.command()
-#async def 나무위키(ctx,*,text):
-#    text=text.replace(" ","%20")
-#    url=(f'https://namu.wiki/w/'+text)
+@bot.command()
+async def 나무위키(ctx,*,text):
+    text=text.replace(" ","%20")
+    url=(f'https://namu.wiki/w/'+text)
 
 
-#    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
-#    driver.get(url)
-#    soup = BeautifulSoup(driver.page_source, 'html.parser')
-#    nopage=soup.select_one('#app > div > div:nth-child(2) > article > div:nth-child(3) > p:nth-child(1)').text
+    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver")
+    driver.get(url)
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    nopage=soup.select_one('#app > div > div:nth-child(2) > article > div:nth-child(3) > p:nth-child(1)').text
     
-#    if "찾을수" and "문서를" in nopage:
-#        embed = discord.Embed(title = text+"의 나무위키",
-#        description = "", color = 3066993)
-#        embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
+    if "찾을수" and "문서를" in nopage:
+        embed = discord.Embed(title = text+"의 나무위키",
+        description = "", color = 3066993)
+        embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
 
-#        embed.add_field(name =  nopage, value = '띄어쓰기를 적절하게 사용해보세요')
-#        await ctx.send(embed = embed)
+        embed.add_field(name =  nopage, value = '띄어쓰기를 적절하게 사용해보세요')
+        await ctx.send(embed = embed)
 
-#    else:
-#        embed = discord.Embed(title = text+"의 나무위키",
-#        description = "", color = 3066993)
-#        embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
+    else:
+        embed = discord.Embed(title = text+"의 나무위키",
+        description = "", color = 3066993)
+        embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
 
-#        embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키')
-#        await ctx.send(embed = embed)
+        embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키')
+        await ctx.send(embed = embed)
+
 
 
 #롤 검색
@@ -193,6 +214,13 @@ async def 날씨(ctx,*,text):
 
 
 
+
+
+
+
+
+
+
 #명령어 목록 알려주기
 @bot.command()
 async def 명령어(ctx):
@@ -240,6 +268,7 @@ async def on_message_delete(message):
 #    embed.add_field(name =  "원본 메세지:"+before.content, value ="바뀐 메세지:"+after.content)
 #    await before.channel.send(embed=embed)
 #    return
+
 
 
 
