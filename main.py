@@ -22,7 +22,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 
-game= discord.Game("버전 1.77v 페코라봇")
+game= discord.Game("버전 1.787v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -65,7 +65,10 @@ async def debug(ctx):
 async def stop(ctx):
     await ctx.send(f'24시간 영원히 살아가')
 
-
+@bot.command(aliases=['네네치'])
+async def 슈퍼네네치(ctx):
+    await message.channel.send(f'슈퍼 네네치~')
+    await message.channel.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 
 
@@ -238,12 +241,6 @@ async def on_message_delete(message):
 #    await before.channel.send(embed=embed)
 #    return
 
-@bot.event
-async def on_message(message):
-    if "슈퍼네네치" not in message.content:
-        return
-    await message.channel.send(f'슈퍼 네네치~')
-    await message.channel.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 
 
