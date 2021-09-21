@@ -22,7 +22,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 
-game= discord.Game("버전 1.78v 페코라봇")
+game= discord.Game("버전 2.01v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
