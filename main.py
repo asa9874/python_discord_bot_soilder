@@ -113,10 +113,16 @@ async def search(ctx,*,text):
 
     Rank_img=soup.find("div", attrs={"class":"SummonerRatingMedium"}).find("img").get('src')
     Rank_text=soup.find("div", attrs={"class":"TierRank"}).get_text()
-    Rank_point=soup.find("span", attrs={"class":"LeaguePoints"}).get_text()
-    Rank_win=soup.find("span", attrs={"class":"wins"}).get_text()
-    Rank_lose=soup.find("span", attrs={"class":"losses"}).get_text()
-    Rank_winrate=soup.find("span", attrs={"class":"winratio"}).get_text()
+    if "Un" in Rank_text:
+        Rank_point="x"
+        Rank_win="x"
+        Rank_lose="x"
+        Rank_winrate="x"
+    else:
+        Rank_point=soup.find("span", attrs={"class":"LeaguePoints"}).get_text()
+        Rank_win=soup.find("span", attrs={"class":"wins"}).get_text()
+        Rank_lose=soup.find("span", attrs={"class":"losses"}).get_text()
+        Rank_winrate=soup.find("span", attrs={"class":"winratio"}).get_text()
     
     Recent_game=soup.find("div", attrs={"class":"GameResult"}).get_text()
     Recent_time=soup.find("div", attrs={"class":"GameLength"}).get_text()
@@ -128,8 +134,8 @@ async def search(ctx,*,text):
     embed = discord.Embed(title = text+"의 랭크",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Rank_img)
-    embed.add_field(name = Rank_text, value = Rank_point)
-    embed.add_field(name = Rank_win+"/"+Rank_lose, value = Rank_winrate,inline=False)
+    embed.add_field(name = "티어:"+Rank_text, value = "포인트:"+Rank_point)
+    embed.add_field(name = "승/패:"+Rank_win+"/"+Rank_lose, value = "승률:"+Rank_winrate,inline=False)
     embed.add_field(name ="최근 전적"+Recent_game+"시간:"+Recent_time, value = "챔프:"+Recent_champ+"___킬뎃:"+Recent_kill+"킬/"+Recent_death+"데스/"+Recent_assist+"어시")
     await ctx.send(embed = embed)
 
