@@ -103,7 +103,7 @@ async def 홀로라이브(ctx):
     embed = discord.Embed(title = "홀로라이브구독자",
     description = "", color = 3066993)
     for i in range(len(name)-25):
-        embed.add_field(name =  "유튜버:"+name[i+25].getText(), value = str(i+26)+"등 구독자:"+number[1+4*i+24].getText(),inline=False)
+        embed.add_field(name =  "유튜버:"+name[i+25].getText(), value = str(i+26)+"등 구독자:"+number[1+4*(i+25)].getText(),inline=False)
     await ctx.send(embed = embed)
 
 
