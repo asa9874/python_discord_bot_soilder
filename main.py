@@ -72,7 +72,7 @@ async def stop(ctx):
 #롤 검색
 
 @bot.command(aliases=['랭크','랭킹','롤 랭크','티어','롤티어'])
-async def search(ctx,text):
+async def search(ctx,*,text):
     print(text)
     url=(f'https://www.op.gg/summoner/userName='+text)
     page = requests.get(url)
@@ -123,7 +123,7 @@ async def covid(ctx):
 
 #날씨
 @bot.command()
-async def 날씨(ctx,text):
+async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
@@ -188,14 +188,15 @@ async def on_message_delete(message):
     await message.channel.send(embed=embed)
     return
 
-@bot.event
-async def on_message_edit(before, after):
-    embed = discord.Embed(title = "탐정왓슨이 수정된 메세지를 찾았습니다.",
-    description = "", color = 15844367)
-    embed.set_thumbnail(url="https://w.namu.la/s/2a901aac58e0a8898cfb238dd859af4dc55f9b24e79f0006f7aa7523222b8426433aa57f0a3ce14cc6f6d3f47796299075d2700271096ebb9599b32ca895666cc3cc58dd40d33297a0f34e91f2164e833ae044ca40f5985c5ce1cbacf903eb32")
-    embed.add_field(name =  "원본 메세지:"+before.content, value ="바뀐 메세지:"+after.content)
-    await before.channel.send(embed=embed)
-    return
+#@bot.event
+#async def on_message_edit(before, after):
+#    embed = discord.Embed(title = "탐정왓슨이 수정된 메세지를 찾았습니다.",
+#    description = "", color = 15844367)
+#    embed.set_thumbnail(url="https://w.namu.la/s/2a901aac58e0a8898cfb238dd859af4dc55f9b24e79f0006f7aa7523222b8426433aa57f0a3ce14cc6f6d3f47796299075d2700271096ebb9599b32ca895666cc3cc58dd40d33297a0f34e91f2164e833ae044ca40f5985c5ce1cbacf903eb32")
+#    embed.add_field(name =  "원본 메세지:"+before.content, value ="바뀐 메세지:"+after.content)
+#    await before.channel.send(embed=embed)
+#    return
+
 
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
