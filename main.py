@@ -82,7 +82,6 @@ async def 나무위키(ctx,*,text):
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     nopage=soup.select_one('#app > div > div:nth-child(2) > article > div:nth-child(3) > p:nth-child(1)').text
-    print(nopage)
     if "찾을수" and "문서를" in nopage:
         embed = discord.Embed(title = text+"의 나무위키",
         description = "", color = 3066993)
