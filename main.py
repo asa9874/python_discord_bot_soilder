@@ -238,6 +238,12 @@ async def on_message_delete(message):
 #    await before.channel.send(embed=embed)
 #    return
 
+@bot.event
+async def on_message(message):
+    if "슈퍼네네치" not in message.content:
+        return
+    await message.channel.send(f'슈퍼 네네치~')
+    await message.channel.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 
 
