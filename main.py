@@ -124,7 +124,7 @@ async def 나무위키(ctx,*,text):
         description = "", color = 3066993)
         embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
 
-        embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키')
+        embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키'+nopage)
         await ctx.send(embed = embed)
 
 
