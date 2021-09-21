@@ -78,7 +78,8 @@ async def 슈퍼네네치(ctx):
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx,text):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome()
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver.implicitly_wait(10)
     driver.get(url)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -124,6 +125,7 @@ async def 나무위키(ctx,*,text):
 
 
     driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
     try:
@@ -214,6 +216,7 @@ async def 날씨(ctx,*,text):
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
     driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver")
+    driver.implicitly_wait(10)
     driver.get(url)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
