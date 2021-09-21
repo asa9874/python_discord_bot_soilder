@@ -76,15 +76,13 @@ async def 슈퍼네네치(ctx):
 
 #hololive 구독자
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
-async def 홀로라이브(ctx,text):
+async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
     driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-    text=int(text)
 
 
     name=soup.findAll("span", attrs={"style":"padding-left: 25px"})
