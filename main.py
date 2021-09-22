@@ -65,9 +65,14 @@ async def debug(ctx):
 async def stop(ctx):
     await ctx.send(f'24시간 영원히 살아가')
 
-@bot.command(aliases=['네네치'])
+@bot.command(aliases=['슈퍼네네치'])
 async def 슈퍼네네치(ctx):
     await ctx.send(f'슈퍼 네네치~')
+    await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
+
+@bot.command(aliases=['하이퍼 네네치'])
+async def 하이퍼네네치(ctx):
+    await ctx.send(f'하이퍼 네네치~')
     await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 
