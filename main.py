@@ -22,7 +22,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 
 
-game= discord.Game("버전 2.01v 페코라봇")
+game= discord.Game("버전 2.0.4v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -113,7 +113,35 @@ async def 홀로라이브(ctx):
 
 
 
+#페코라 수익
+@bot.command(aliases=['페코라 수익','페코라 정보','페코라 채널','페코라정보','페코라채널'])
+async def 페코라수익(ctx):
+    url=(f'https://playboard.co/channel/UC1DCedRgGHBdm81E1llLhOQ')
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver.implicitly_wait(10)
+    driver.get(url)
 
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    box=soup.find_all("div", attrs={"class":"item__count"})
+    pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
+
+
+    embed = discord.Embed(title = "페코라 채널정보",
+    description = "", color = 3066993)
+    embed.set_thumbnail(url=pekora)
+
+    embed.add_field(name =  "좋아요 비율", value = box[0].getText())
+    embed.add_field(name =  "싫어요 비율", value = box[1].getText())
+    embed.add_field(name =  "댓글 비율", value = box[2].getText(),inline=False)
+    embed.add_field(name =  "최고 동시 시청자", value = box[3].getText())
+    embed.add_field(name =  "평균 동시 시청자", value = box[4].getText())
+    embed.add_field(name =  "누적 방송 횟수", value = box[5].getText(),inline=False)
+    embed.add_field(name =  "오늘 수입", value = box[6].getText())
+    embed.add_field(name =  "어제 수입", value = box[7].getText())
+    embed.add_field(name =  "최근 7일 수입", value = box[8].getText())
+    embed.add_field(name =  "전체 수입", value = box[9].getText())
+    await ctx.send(embed = embed) 
 
 
 
@@ -263,6 +291,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!코로나", value = "코로나 정보 보기.",inline=False)
     embed.add_field(name = "!날씨", value = "날씨 정보 보기",inline=False)
     embed.add_field(name = "!나무위키 (검색할것)", value = "나무위키 사이트에 연결",inline=False)
+    embed.add_field(name = "!페코라수익", value = "페코라의수익",inline=False)
     await ctx.send(embed = embed)
 
 
