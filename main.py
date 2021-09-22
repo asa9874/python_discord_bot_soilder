@@ -130,7 +130,6 @@ async def 페코라수익(ctx):
         box[i]=box[i].getText().replace("$","")
         box[i]=box[i].replace(",","")
         box[i]=int(box[i])
-        print(box[i])
         box[i]=format(int(box[i]*1183),",")
 
     
