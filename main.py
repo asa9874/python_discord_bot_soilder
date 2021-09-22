@@ -125,13 +125,14 @@ async def 페코라수익(ctx):
 
     box=soup.find_all("div", attrs={"class":"item__count"})
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
-
-    for i in [6,7,8,9]:
-        box[i]=box[i].getText().replace("$","")
-        box[i]=box[i].replace(",","")
-        box[i]=int(box[i])
-        box[i]=format(int(box[i]*1183),",")
-
+    try:
+        for i in [6,7,8,9]:
+            box[i]=box[i].getText().replace("$","")
+            box[i]=box[i].replace(",","")
+            box[i]=int(box[i])
+            box[i]=format(int(box[i]*1183),",")
+    except:
+        await ctx.send(f'원변환 실패')
     
     embed = discord.Embed(title = "페코라 채널정보",
     description = "", color = 3066993)
