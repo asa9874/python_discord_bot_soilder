@@ -134,6 +134,7 @@ async def 페코라수익(ctx):
             box[i]=format(int(box[i]*1183),",")
     except:
         await ctx.send(f'원변환 실패')
+        return
     
     embed = discord.Embed(title = "페코라 채널정보(1달러->1183원기준)",
     description = "", color = 3066993)
