@@ -125,7 +125,8 @@ async def 페코라수익(ctx):
 
     box=soup.find_all("div", attrs={"class":"item__count"})
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
-    #try:
+    
+    try:
         for i in [6,7,8,9]:
             box[i]=box[i].getText().replace("$","")
             box[i]=box[i].replace(",","")
