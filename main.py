@@ -126,29 +126,30 @@ async def 페코라수익(ctx):
     box=soup.find_all("div", attrs={"class":"item__count"})
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
     #try:
-    #    for i in [6,7,8,9]:
-    #        box[i]=box[i].getText().replace("$","")
-    #        box[i]=box[i].replace(",","")
-    #        box[i]=int(box[i])
-    #        box[i]=format(int(box[i]*1183),",")
-    #except:
-    #    await ctx.send(f'원변환 실패')
+        for i in [6,7,8,9]:
+            box[i]=box[i].getText().replace("$","")
+            box[i]=box[i].replace(",","")
+            box[i]=int(box[i])
+            box[i]=format(int(box[i]*1183),",")
+    except:
+        await ctx.send(f'원변환 실패')
     
-    embed = discord.Embed(title = "페코라 채널정보",
+    embed = discord.Embed(title = "페코라 채널정보(1달러->1183원기준)",
     description = "", color = 3066993)
     embed.set_thumbnail(url=pekora)
-
+    
     embed.add_field(name =  "좋아요 비율", value = box[0].getText())
     embed.add_field(name =  "싫어요 비율", value = box[1].getText())
     embed.add_field(name =  "댓글 비율", value = box[2].getText(),inline=False)
     embed.add_field(name =  "최고 동시 시청자", value = box[3].getText())
     embed.add_field(name =  "평균 동시 시청자", value = box[4].getText())
     embed.add_field(name =  "누적 방송 횟수", value = box[5].getText(),inline=False)
-    embed.add_field(name =  "오늘 수입", value = box[6].getText())
-    embed.add_field(name =  "어제 수입", value = box[7].getText())
-    embed.add_field(name =  "최근 7일 수입", value = box[8].getText())
-    embed.add_field(name =  "전체 수입", value = box[9].getText())
+    embed.add_field(name =  "오늘 수입", value = str(box[6])+"₩")
+    embed.add_field(name =  "어제 수입", value = str(box[7])+"₩")
+    embed.add_field(name =  "최근 7일 수입", value = str(box[8])+"₩")
+    embed.add_field(name =  "전체 수입", value = str(box[9])+"₩")
     await ctx.send(embed = embed) 
+
 
 
 
