@@ -77,15 +77,11 @@ async def 하이퍼네네치(ctx):
 @bot.command()
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
+    
+    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
+    driver.implicitly_wait(10)
+    driver.get(url)
 
-    try:
-        driver=webdriver.Chrome(r"/app/.driver/bin/chromedriver")
-        driver.implicitly_wait(10)
-        driver.get(url)
-
-    except:
-        await ctx.send(f'실패')
-        return
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
@@ -119,7 +115,7 @@ async def 싱글벙글(ctx,text):
     url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
 
 
-    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
+    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -142,7 +138,7 @@ async def 싱글벙글(ctx,text):
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
+    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -174,7 +170,7 @@ async def 홀로라이브(ctx):
 @bot.command(aliases=['페코라 수익','페코라 정보','페코라 채널','페코라정보','페코라채널'])
 async def 페코라수익(ctx):
     url=(f'https://playboard.co/channel/UC1DCedRgGHBdm81E1llLhOQ')
-    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
+    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -221,7 +217,7 @@ async def 나무위키(ctx,*,text):
     url=(f'https://namu.wiki/w/'+text)
 
 
-    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
+    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -312,7 +308,7 @@ async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
+    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
