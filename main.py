@@ -23,10 +23,9 @@ import time
 
 # 옵션 생성
 options = webdriver.ChromeOptions()
-#렉줄이기
+# 랙제거
 prefs = {'profile.default_content_setting_values': {'cookies' : 2, 'images': 2, 'plugins' : 2, 'popups': 2, 'geolocation': 2, 'notifications' : 2, 'auto_select_certificate': 2, 'fullscreen' : 2, 'mouselock' : 2, 'mixed_script': 2, 'media_stream' : 2, 'media_stream_mic' : 2, 'media_stream_camera': 2, 'protocol_handlers' : 2, 'ppapi_broker' : 2, 'automatic_downloads': 2, 'midi_sysex' : 2, 'push_messaging' : 2, 'ssl_cert_decisions': 2, 'metro_switch_to_desktop' : 2, 'protected_media_identifier': 2, 'app_banner': 2, 'site_engagement' : 2, 'durable_storage' : 2}}   
 options.add_experimental_option('prefs', prefs)
-
 #executable_path= r"/app/.chromedriver/bin/chromedriver", options=options     크롬웹드라이버 클라우드할때 넣기
 
 
@@ -92,7 +91,7 @@ async def 하이퍼네네치(ctx):
 @bot.command()
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
-    
+
     try:
         driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
         driver.implicitly_wait(10)
@@ -102,7 +101,7 @@ async def 스팀세일(ctx):
         await ctx.send(f'실패')
         return
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    time.sleep(1)
+
     whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
     day=soup.select_one('#contents > div > div:nth-child(1) > div > h4').text
 
@@ -128,10 +127,20 @@ async def 스팀세일(ctx):
 
 
 #dc하기
-@bot.command()
-async def 싱글벙글(ctx,text):
+@bot.command(aliases=['디씨인사이드','디씨'])
+async def dc(ctx,text):
 
-    url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
+
+    if text in '싱글벙글':
+        url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
+    elif text in '키즈나':
+        url=('https://gall.dcinside.com/mgallery/board/lists?id=kizunaai&exception_mode=recommend')
+    elif text in '몸매':
+        url=('https://gall.dcinside.com/mgallery/board/lists?id=beautifulbody&exception_mode=recommend')
+    else:
+        await ctx.send(f'갤러리실패')
+        return
+
 
 
     driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
@@ -142,11 +151,11 @@ async def 싱글벙글(ctx,text):
 
 
     name=soup.findAll("td", attrs={"class":"gall_tit ub-word"})
-
-
-    embed = discord.Embed(title = "`싱글벙글지구촌 개념글`",
+   
+    embed = discord.Embed(title = "`개념글`",
     description = "", color = 3066993)
-    for i in range(3,int(text)+3):
+    embed.set_thumbnail(url='https://static-s.aa-cdn.net/img/gp/20600005506263/VP6qsU103YOgbP_xEJhUg77FoWDIhiWOjW6YJ9BxxZpYcCzo_TJnBQhTGs5eoPGsxKI=s300?v=1')
+    for i in range(0,10):
         embed.add_field(name =name[i].getText().replace('\n',''), value = f'https://gall.dcinside.com/'+name[i].find('a').get('href'),inline=False)
     await ctx.send(embed = embed)
     driver.quit()
@@ -259,6 +268,7 @@ async def 나무위키(ctx,*,text):
 
         embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키')
         await ctx.send(embed = embed)
+
     driver.quit()
 
 
@@ -377,7 +387,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!날씨", value = "날씨 정보 보기",inline=False)
     embed.add_field(name = "!나무위키 (검색할것)", value = "나무위키 사이트에 연결",inline=False)
     embed.add_field(name = "!페코라수익", value = "페코라의수익",inline=False)
-    embed.add_field(name = "!싱글벙글 숫자", value = "싱글벙글 최근 개념글()개",inline=False)
+    embed.add_field(name = "!디씨 (갤러리)", value = "갤러리 념글 10개 갤목록:키즈나,싱글벙글,몸매",inline=False)
     embed.add_field(name = "!스팀세일", value = "스팀세일",inline=False) 
     await ctx.send(embed = embed)
 
