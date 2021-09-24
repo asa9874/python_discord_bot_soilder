@@ -138,7 +138,7 @@ async def 싱글벙글(ctx,text):
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
+    driver=webdriver.Chrome(r"/app/.driver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
