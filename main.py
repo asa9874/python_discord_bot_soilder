@@ -16,13 +16,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
-
-
-#executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
+#executable_path= r"/app/.driver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
 
 
 
-game= discord.Game("버전 2.0.4v 페코라봇")
+game= discord.Game("버전 3.6.9v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -79,11 +77,38 @@ async def 하이퍼네네치(ctx):
 
 
 
+
+
+#dc하기
+@bot.command()
+async def 싱글벙글(ctx,text):
+    url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
+
+
+    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
+    driver.implicitly_wait(10)
+    driver.get(url)
+
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+
+    name=soup.findAll("td", attrs={"class":"gall_tit ub-word"})
+
+
+    embed = discord.Embed(title = "`싱글벙글지구촌 개념글`",
+    description = "", color = 3066993)
+    for i in range(3,text+3):
+        embed.add_field(name =name[i].getText().replace('\n',''), value = f'https://gall.dcinside.com/'+name[i].find('a').get('href'),inline=False)
+    await ctx.send(embed = embed)
+
+
+
+
 #hololive 구독자
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -93,23 +118,21 @@ async def 홀로라이브(ctx):
     name=soup.findAll("span", attrs={"style":"padding-left: 25px"})
     number=soup.findAll("a", attrs={"class":"py-3 px-2"})
 
-    for i in name:
-        print(i.getText())
-        
-    for j in number:
-        print(j.getText())
-
     embed = discord.Embed(title = "홀로라이브구독자",
     description = "", color = 3066993)
     for i in range(len(name)):
-        embed.add_field(name =  "유튜버:"+name[i].getText(), value = str(i+1)+"등 구독자:"+number[1+4*i].getText(),inline=False)
+        embed.add_field(name =  "유튜버:"+name[i].getText(), value = str(i+1)+"등: 구독자:"+"`"+number[1+4*i].getText()+"`",inline=False)
     await ctx.send(embed = embed)
     
     embed = discord.Embed(title = "홀로라이브구독자",
     description = "", color = 3066993)
     for i in range(len(name)-25):
-        embed.add_field(name =  "유튜버:"+name[i+25].getText(), value = str(i+26)+"등 구독자:"+number[1+4*(i+25)].getText(),inline=False)
+        embed.add_field(name =  "유튜버:"+name[i+25].getText(), value = str(i+26)+"등: 구독자:"+"`"+number[1+4*(i+25)].getText()+"`",inline=False)
     await ctx.send(embed = embed)
+
+
+
+
 
 
 
@@ -117,7 +140,7 @@ async def 홀로라이브(ctx):
 @bot.command(aliases=['페코라 수익','페코라 정보','페코라 채널','페코라정보','페코라채널'])
 async def 페코라수익(ctx):
     url=(f'https://playboard.co/channel/UC1DCedRgGHBdm81E1llLhOQ')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -125,7 +148,8 @@ async def 페코라수익(ctx):
 
     box=soup.find_all("div", attrs={"class":"item__count"})
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
-    
+
+
     try:
         for i in [6,7,8,9]:
             box[i]=box[i].getText().replace("$","")
@@ -136,23 +160,21 @@ async def 페코라수익(ctx):
         await ctx.send(f'원변환 실패')
         return
     
+
     embed = discord.Embed(title = "페코라 채널정보(1달러->1183원기준)",
     description = "", color = 3066993)
     embed.set_thumbnail(url=pekora)
-    
     embed.add_field(name =  "좋아요 비율", value = box[0].getText())
     embed.add_field(name =  "싫어요 비율", value = box[1].getText())
     embed.add_field(name =  "댓글 비율", value = box[2].getText(),inline=False)
     embed.add_field(name =  "최고 동시 시청자", value = box[3].getText())
     embed.add_field(name =  "평균 동시 시청자", value = box[4].getText())
     embed.add_field(name =  "누적 방송 횟수", value = box[5].getText(),inline=False)
-    embed.add_field(name =  "오늘 수입", value = str(box[6])+"₩")
-    embed.add_field(name =  "어제 수입", value = str(box[7])+"₩")
-    embed.add_field(name =  "최근 7일 수입", value = str(box[8])+"₩")
-    embed.add_field(name =  "전체 수입", value = str(box[9])+"₩")
+    embed.add_field(name =  "오늘 수입", value = "`"+str(box[6])+"₩"+"`")
+    embed.add_field(name =  "어제 수입", value = "`"+str(box[7])+"₩"+"`")
+    embed.add_field(name =  "최근 7일 수입", value = "`"+str(box[8])+"₩"+"`")
+    embed.add_field(name =  "전체 수입", value = "`"+str(box[9])+"₩"+"`")
     await ctx.send(embed = embed) 
-
-
 
 
 
@@ -165,7 +187,7 @@ async def 나무위키(ctx,*,text):
     url=(f'https://namu.wiki/w/'+text)
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
     driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -174,7 +196,7 @@ async def 나무위키(ctx,*,text):
     except:
         nopage="1"
 
-    if "찾을수" and "문서를" in nopage:
+    if "찾을수" in nopage:
         embed = discord.Embed(title = text+"의 나무위키",
         description = "", color = 3066993)
         embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
@@ -187,7 +209,7 @@ async def 나무위키(ctx,*,text):
         description = "", color = 3066993)
         embed.set_thumbnail(url="https://w.namu.la/s/76f3cd317712c830ca32c3574db36c64e1e5ecaa7cc034113f98bec89e4a25149a8528b25fd556354c6e594c750889b3971e729596247278234391b5a6c69f4820659c9490c4d6d2e9ca9ab2815bf3ffd8c403de79405d5be2fcd9d849d9e77e")
 
-        embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키'+nopage)
+        embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키')
         await ctx.send(embed = embed)
 
 
@@ -224,8 +246,8 @@ async def search(ctx,*,text):
     embed = discord.Embed(title = text+"의 랭크",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Rank_img)
-    embed.add_field(name = "티어:"+Rank_text, value = "포인트:"+Rank_point)
-    embed.add_field(name = "승/패:"+Rank_win+"/"+Rank_lose, value = "승률:"+Rank_winrate,inline=False)
+    embed.add_field(name = "티어:"+"`"+Rank_text+"`", value = "포인트:"+Rank_point)
+    embed.add_field(name = "승/패:"+"`"+Rank_win+"/"+Rank_lose+"`", value = "승률:"+"`"+Rank_winrate+"`",inline=False)
     embed.add_field(name ="최근 전적"+Recent_game+"시간:"+Recent_time, value = "챔프:"+Recent_champ+"___킬뎃:"+Recent_kill+"킬/"+Recent_death+"데스/"+Recent_assist+"어시")
     await ctx.send(embed = embed)
 
@@ -246,7 +268,7 @@ async def covid(ctx):
 
     embed = discord.Embed(title = "코로나 확진자"+time,
     description = "", color = 0x62c1cc)
-    embed.add_field(name = "총 확진자:"+total, value ="오늘:"+num)
+    embed.add_field(name = "총 확진자:"+"`"+total+"`", value ="오늘:"+"`"+num+"`")
     await ctx.send(embed = embed)
 
 
@@ -256,7 +278,7 @@ async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(r"/app/.chromedriver/bin/chromedriver" )
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -302,6 +324,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!날씨", value = "날씨 정보 보기",inline=False)
     embed.add_field(name = "!나무위키 (검색할것)", value = "나무위키 사이트에 연결",inline=False)
     embed.add_field(name = "!페코라수익", value = "페코라의수익",inline=False)
+    embed.add_field(name = "!싱글벙글 숫자", value = "싱글벙글 최근 개념글()개",inline=False)
     await ctx.send(embed = embed)
 
 
