@@ -16,11 +16,11 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
-#executable_path= r"/app/.driver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
+#executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
 
 
 
-game= discord.Game("버전 3.6.9v 페코라봇")
+game= discord.Game("버전 1.78v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -73,16 +73,23 @@ async def 하이퍼네네치(ctx):
     await ctx.send(f'하이퍼 네네치~')
     await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
+
+
+
+
 #steamsale
 @bot.command()
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
-    
-    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
-    driver.implicitly_wait(10)
-    driver.get(url)
 
+    try:
+        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+        driver.implicitly_wait(10)
+        driver.get(url)
 
+    except:
+        await ctx.send(f'실패')
+        return
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
     whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
@@ -106,7 +113,6 @@ async def 스팀세일(ctx):
 
 
 
-    
 
 
 #dc하기
@@ -115,7 +121,7 @@ async def 싱글벙글(ctx,text):
     url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -138,7 +144,7 @@ async def 싱글벙글(ctx,text):
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome(r"/app/.driver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -170,7 +176,7 @@ async def 홀로라이브(ctx):
 @bot.command(aliases=['페코라 수익','페코라 정보','페코라 채널','페코라정보','페코라채널'])
 async def 페코라수익(ctx):
     url=(f'https://playboard.co/channel/UC1DCedRgGHBdm81E1llLhOQ')
-    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -180,15 +186,15 @@ async def 페코라수익(ctx):
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
 
 
-    try:
-        for i in [6,7,8,9]:
-            box[i]=box[i].getText().replace("$","")
-            box[i]=box[i].replace(",","")
-            box[i]=int(box[i])
-            box[i]=format(int(box[i]*1183),",")
-    except:
-        await ctx.send(f'원변환 실패')
-        return
+    #try:
+    #    for i in [6,7,8,9]:
+    #        box[i]=box[i].getText().replace("$","")
+    #        box[i]=box[i].replace(",","")
+    #        box[i]=int(box[i])
+    #        box[i]=format(int(box[i]*1183),",")
+    #except:
+    #    await ctx.send(f'원변환 실패')
+    #    return
     
 
     embed = discord.Embed(title = "페코라 채널정보(1달러->1183원기준)",
@@ -217,7 +223,7 @@ async def 나무위키(ctx,*,text):
     url=(f'https://namu.wiki/w/'+text)
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -308,7 +314,7 @@ async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(executable_path= r"/app/.driver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -355,7 +361,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!나무위키 (검색할것)", value = "나무위키 사이트에 연결",inline=False)
     embed.add_field(name = "!페코라수익", value = "페코라의수익",inline=False)
     embed.add_field(name = "!싱글벙글 숫자", value = "싱글벙글 최근 개념글()개",inline=False)
-    embed.add_field(name = "!스팀세일", value = "스팀세일",inline=False)
+    embed.add_field(name = "!스팀세일", value = "스팀세일",inline=False) 
     await ctx.send(embed = embed)
 
 
@@ -390,9 +396,6 @@ async def on_message_delete(message):
 #    embed.add_field(name =  "원본 메세지:"+before.content, value ="바뀐 메세지:"+after.content)
 #    await before.channel.send(embed=embed)
 #    return
-
-
-
 
 
 
