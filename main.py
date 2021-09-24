@@ -15,9 +15,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
-
-import time
-
 #executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
 
 
@@ -91,8 +88,6 @@ async def 스팀세일(ctx):
     
     
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    
-    time.sleep(5)
     
     whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
     day=soup.select_one('#contents > div > div:nth-child(1) > div > h4').text
