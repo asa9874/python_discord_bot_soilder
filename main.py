@@ -23,7 +23,7 @@ import time
 
 # 옵션 생성
 options = webdriver.ChromeOptions()
-렉줄이기
+#렉줄이기
 prefs = {'profile.default_content_setting_values': {'cookies' : 2, 'images': 2, 'plugins' : 2, 'popups': 2, 'geolocation': 2, 'notifications' : 2, 'auto_select_certificate': 2, 'fullscreen' : 2, 'mouselock' : 2, 'mixed_script': 2, 'media_stream' : 2, 'media_stream_mic' : 2, 'media_stream_camera': 2, 'protocol_handlers' : 2, 'ppapi_broker' : 2, 'automatic_downloads': 2, 'midi_sysex' : 2, 'push_messaging' : 2, 'ssl_cert_decisions': 2, 'metro_switch_to_desktop' : 2, 'protected_media_identifier': 2, 'app_banner': 2, 'site_engagement' : 2, 'durable_storage' : 2}}   
 options.add_experimental_option('prefs', prefs)
 
@@ -92,7 +92,7 @@ async def 하이퍼네네치(ctx):
 @bot.command()
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
-
+    
     try:
         driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
         driver.implicitly_wait(10)
@@ -102,7 +102,7 @@ async def 스팀세일(ctx):
         await ctx.send(f'실패')
         return
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-
+    time.sleep(1)
     whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
     day=soup.select_one('#contents > div > div:nth-child(1) > div > h4').text
 
