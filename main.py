@@ -73,10 +73,39 @@ async def 하이퍼네네치(ctx):
     await ctx.send(f'하이퍼 네네치~')
     await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
+#steamsale
+@bot.command()
+async def 스팀세일(ctx):
+    url=('https://steamsale.windbell.co.kr/Next')
+
+    driver=webdriver.Chrome(r"/app/.driver/bin/chromedriver")
+    driver.implicitly_wait(10)
+    driver.get(url)
+
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+    whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
+    day=soup.select_one('#contents > div > div:nth-child(1) > div > h4').text
+
+    hour=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(4) > span:nth-child(1)').text
+    min=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(4) > span:nth-child(2)').text
+    second=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(4) > span:nth-child(3)').text
+    
+    term=soup.select_one('#contents > div > div:nth-child(1) > div > h6').text
+
+    day=day.replace('\n','')
+    day=day.replace(' ','')
+    term=term.replace('            ','')
+    embed = discord.Embed(title = whatsale,
+    description = "", color = 3066993)
+    embed.set_thumbnail(url='https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Steam_icon_logo.svg/512px-Steam_icon_logo.svg.png')
+    embed.add_field(name = "남은기간:`" + day+ "일 "+ hour+"시간 "+min+"분 "+second+"초`", value ="세일기간:`"+term+"`")
+
+    await ctx.send(embed = embed) 
 
 
 
-
+    
 
 
 #dc하기
@@ -325,6 +354,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!나무위키 (검색할것)", value = "나무위키 사이트에 연결",inline=False)
     embed.add_field(name = "!페코라수익", value = "페코라의수익",inline=False)
     embed.add_field(name = "!싱글벙글 숫자", value = "싱글벙글 최근 개념글()개",inline=False)
+    embed.add_field(name = "!스팀세일", value = "스팀세일",inline=False)
     await ctx.send(embed = embed)
 
 
