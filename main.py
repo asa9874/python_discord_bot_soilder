@@ -16,6 +16,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 
+import time
+
 #executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
 
 
@@ -82,16 +84,16 @@ async def 하이퍼네네치(ctx):
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
 
-    try:
-        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
-        driver.implicitly_wait(10)
-        driver.get(url)
 
-    except:
-        await ctx.send(f'실패')
-        return
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver.implicitly_wait(10)
+    driver.get(url)
+    
+    
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-
+    
+    time.sleep(5)
+    
     whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
     day=soup.select_one('#contents > div > div:nth-child(1) > div > h4').text
 
