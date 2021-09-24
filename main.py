@@ -1,6 +1,3 @@
-import discord
-from discord.ext import commands
-import random
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -15,11 +12,22 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
-#executable_path= r"/app/.chromedriver/bin/chromedriver"     크롬웹드라이버 클라우드할때 넣기
+
+import time
 
 
 
-game= discord.Game("버전 1.78v 페코라봇")
+
+# 옵션 생성
+options = webdriver.ChromeOptions()
+# 창 숨기는 옵션 추가
+options.add_argument("headless")
+
+#executable_path= r"/app/.chromedriver/bin/chromedriver", options=options     크롬웹드라이버 클라우드할때 넣기
+
+
+
+game= discord.Game("버전 α 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -81,14 +89,16 @@ async def 하이퍼네네치(ctx):
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
 
+    try:
+        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+        driver.implicitly_wait(10)
+        driver.get(url)
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
-    driver.implicitly_wait(10)
-    driver.get(url)
-    
-    
+    except:
+        await ctx.send(f'실패')
+        return
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    
+
     whatsale=soup.select_one('#contents > div > div:nth-child(1) > div > h3:nth-child(1)').text
     day=soup.select_one('#contents > div > div:nth-child(1) > div > h4').text
 
@@ -107,6 +117,7 @@ async def 스팀세일(ctx):
     embed.add_field(name = "남은기간:`" + day+ "일 "+ hour+"시간 "+min+"분 "+second+"초`", value ="세일기간:`"+term+"`")
 
     await ctx.send(embed = embed) 
+    driver.quit()
 
 
 
@@ -118,7 +129,7 @@ async def 싱글벙글(ctx,text):
     url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -133,6 +144,7 @@ async def 싱글벙글(ctx,text):
     for i in range(3,text+3):
         embed.add_field(name =name[i].getText().replace('\n',''), value = f'https://gall.dcinside.com/'+name[i].find('a').get('href'),inline=False)
     await ctx.send(embed = embed)
+    driver.quit()
 
 
 
@@ -141,7 +153,7 @@ async def 싱글벙글(ctx,text):
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -162,6 +174,7 @@ async def 홀로라이브(ctx):
     for i in range(len(name)-25):
         embed.add_field(name =  "유튜버:"+name[i+25].getText(), value = str(i+26)+"등: 구독자:"+"`"+number[1+4*(i+25)].getText()+"`",inline=False)
     await ctx.send(embed = embed)
+    driver.quit()
 
 
 
@@ -173,7 +186,7 @@ async def 홀로라이브(ctx):
 @bot.command(aliases=['페코라 수익','페코라 정보','페코라 채널','페코라정보','페코라채널'])
 async def 페코라수익(ctx):
     url=(f'https://playboard.co/channel/UC1DCedRgGHBdm81E1llLhOQ')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -183,15 +196,15 @@ async def 페코라수익(ctx):
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
 
 
-    #try:
-    #    for i in [6,7,8,9]:
-    #        box[i]=box[i].getText().replace("$","")
-    #        box[i]=box[i].replace(",","")
-    #        box[i]=int(box[i])
-    #        box[i]=format(int(box[i]*1183),",")
-    #except:
-    #    await ctx.send(f'원변환 실패')
-    #    return
+    try:
+        for i in [6,7,8,9]:
+            box[i]=box[i].getText().replace("$","")
+            box[i]=box[i].replace(",","")
+            box[i]=int(box[i])
+            box[i]=format(int(box[i]*1183),",")
+    except:
+        await ctx.send(f'원변환 실패')
+        return
     
 
     embed = discord.Embed(title = "페코라 채널정보(1달러->1183원기준)",
@@ -208,6 +221,7 @@ async def 페코라수익(ctx):
     embed.add_field(name =  "최근 7일 수입", value = "`"+str(box[8])+"₩"+"`")
     embed.add_field(name =  "전체 수입", value = "`"+str(box[9])+"₩"+"`")
     await ctx.send(embed = embed) 
+    driver.quit()
 
 
 
@@ -220,7 +234,7 @@ async def 나무위키(ctx,*,text):
     url=(f'https://namu.wiki/w/'+text)
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
     driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -244,6 +258,7 @@ async def 나무위키(ctx,*,text):
 
         embed.add_field(name = 'https://namu.wiki/w/'+text, value = '나무위키')
         await ctx.send(embed = embed)
+    driver.quit()
 
 
 
@@ -311,7 +326,7 @@ async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver")
+    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -328,6 +343,7 @@ async def 날씨(ctx,*,text):
     embed.set_thumbnail(url="http:" + Weather_img)
     embed.add_field(name =  "비올확률:"+Weather_rain, value ="습도:"+Weather_water)
     await ctx.send(embed = embed)
+    driver.quit()
 
 
 
