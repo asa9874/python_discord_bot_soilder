@@ -78,9 +78,14 @@ async def 하이퍼네네치(ctx):
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
 
-    driver=webdriver.Chrome(r"/app/.driver/bin/chromedriver")
-    driver.implicitly_wait(10)
-    driver.get(url)
+    try:
+        driver=webdriver.Chrome(r"/app/.driver/bin/chromedriver")
+        driver.implicitly_wait(10)
+        driver.get(url)
+
+    except:
+        await ctx.send(f'실패')
+        return
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
 
