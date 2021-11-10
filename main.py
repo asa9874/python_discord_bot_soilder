@@ -30,7 +30,7 @@ options.add_experimental_option('prefs', prefs)
 
 
 
-game= discord.Game("버전 1.78v 페코라봇")
+game= discord.Game("NEW버전 1v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
@@ -57,21 +57,22 @@ async def pekomiko(ctx):
 async def introduce(ctx):
     await ctx.send(f'こんぺこ、こんぺこ、こんぺこ！ホロライブ三期生の兎田ぺこらぺこ！どうも、どうも！\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
 
-@bot.command(aliases=['닥쳐','시발',])
-async def 아가리(ctx):
-    await ctx.send(f'말이 너무심해')
+#@bot.command(aliases=['닥쳐','시발',])
+#async def 아가리(ctx):
+#    await ctx.send(f'말이 너무심해')
 
-@bot.command(aliases=['야한거',])
-async def 섹스(ctx):
-    await ctx.send(f'야한건 안되')
+#@bot.command(aliases=['야한거',])
+#async def 섹스(ctx):
+#    await ctx.send(f'야한건 안되')
    
-@bot.command(aliases=['디버그'])
-async def debug(ctx):
-    await ctx.send(f'페코라는 프로그램이 아니야')
+#@bot.command(aliases=['디버그'])
+#async def debug(ctx):
+#    await ctx.send(f'페코라는 프로그램이 아니야')
     
-@bot.command(aliases=['멈춰'])
-async def stop(ctx):
-    await ctx.send(f'24시간 영원히 살아가')
+#@bot.command(aliases=['멈춰'])
+#async def stop(ctx):
+#    await ctx.send(f'24시간 영원히 살아가')
+
 
 @bot.command(aliases=['슈퍼 네네치'])
 async def 슈퍼네네치(ctx):
@@ -82,6 +83,47 @@ async def 슈퍼네네치(ctx):
 async def 하이퍼네네치(ctx):
     await ctx.send(f'하이퍼 네네치~')
     await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
+
+#롤상점
+@bot.command(aliases=['롤 상점'])
+async def 롤상점(ctx):
+
+    embed = discord.Embed(title = 롤상점,
+    description = "", color = 3066993)
+    embed.set_thumbnail(url='https://pbs.twimg.com/profile_images/1082741607852519424/U84ElL3m.png')
+    embed.add_field(name = "", value ="https://store.leagueoflegends.co.kr/")
+    await ctx.send(embed = embed) 
+
+
+##우타
+#@bot.command()
+#async def 우타(ctx):
+#    url=('https://www.youtube.com/playlist?list=PLet0wKVboCzEMtX-hZQn1obu40HWVKn7q')
+
+#    try:
+#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+#        driver.implicitly_wait(10)
+#        driver.get(url)
+
+#    except:
+#        await ctx.send(f'실패')
+#        return
+
+#    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+
+#    aaa=soup.findAll("a", attrs={"class":"ytp-next-button ytp-button"})
+
+#    print(aaa)
+
+#    #await ctx.send(aaa)
+
+
+
+
+
+
+
 
 
 
@@ -210,15 +252,15 @@ async def 페코라수익(ctx):
     pekora=soup.select_one('#app > div.__window > div > div > main > article > header > div > div > div.logo > a > div > picture > img').get('src')
 
 
-    try:
-        for i in [6,7,8,9]:
-            box[i]=box[i].getText().replace("$","")
-            box[i]=box[i].replace(",","")
-            box[i]=int(box[i])
-            box[i]=format(int(box[i]*1183),",")
-    except:
-        await ctx.send(f'원변환 실패')
-        return
+    #try:
+    #    for i in [6,7,8,9]:
+    #        box[i]=box[i].getText().replace("$","")
+    #        box[i]=box[i].replace(",","")
+    #        box[i]=int(box[i])
+    #        box[i]=format(int(box[i]*1183),",")
+    #except:
+    #    await ctx.send(f'원변환 실패')
+    #    return
     
 
     embed = discord.Embed(title = "페코라 채널정보(1달러->1183원기준)",
@@ -305,6 +347,14 @@ async def search(ctx,*,text):
     Recent_assist=soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.RealContent > div > div.Content > div.GameItemList > div:nth-child(1) > div > div.Content > div.KDA > div.KDA > span.Assist").text
     Recent_champ=soup.select_one("#SummonerLayoutContent > div.tabItem.Content.SummonerLayoutContent.summonerLayout-summary > div.RealContent > div > div.Content > div.GameItemList > div:nth-child(1) > div > div.Content > div.GameSettingInfo > div.ChampionName > a").text
 
+
+
+
+
+
+
+
+
     embed = discord.Embed(title = text+"의 랭크",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Rank_img)
@@ -378,10 +428,6 @@ async def 날씨(ctx,*,text):
 async def 명령어(ctx):
     embed = discord.Embed(title = "현재있는 명령어 목록",
     description = "", color = 0x62c1cc)
-    embed.add_field(name = "!콘페코", value = "인사",inline=False)
-    embed.add_field(name = "!병신", value = "병신페코",inline=False)
-    embed.add_field(name = "!페코미코", value = "페코미코!",inline=False)
-    embed.add_field(name = "!자기소개", value = "페코라의 자기소개",inline=False)
     embed.add_field(name = "!티어 (이름)", value = "랭크 검색",inline=False)
     embed.add_field(name = "!코로나", value = "코로나 정보 보기.",inline=False)
     embed.add_field(name = "!날씨", value = "날씨 정보 보기",inline=False)
@@ -389,6 +435,7 @@ async def 명령어(ctx):
     embed.add_field(name = "!페코라수익", value = "페코라의수익",inline=False)
     embed.add_field(name = "!디씨 (갤러리)", value = "갤러리 념글 10개 갤목록:키즈나,싱글벙글,몸매",inline=False)
     embed.add_field(name = "!스팀세일", value = "스팀세일",inline=False) 
+    embed.add_field(name = "!홀로라이브", value = "홀로라이브 구독자순위",inline=False) 
     await ctx.send(embed = embed)
 
 
@@ -415,6 +462,17 @@ async def on_message_delete(message):
     await message.channel.send(embed=embed)
     return
 
+
+
+
+
+
+
+
+
+    #안되는것들
+
+
 #@bot.event
 #async def on_message_edit(before, after):
 #    embed = discord.Embed(title = "탐정왓슨이 수정된 메세지를 찾았습니다.",
@@ -423,6 +481,65 @@ async def on_message_delete(message):
 #    embed.add_field(name =  "원본 메세지:"+before.content, value ="바뀐 메세지:"+after.content)
 #    await before.channel.send(embed=embed)
 #    return
+
+##롤패치
+#@bot.command()
+#async def 롤패치(ctx):
+#    url=('https://www.leagueoflegends.com/ko-kr/news/game-updates/')
+
+#    try:
+#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+#        driver.implicitly_wait(10)
+#        driver.get(url)
+
+#    except:
+#        await ctx.send(f'실패')
+#        return
+#    soup = BeautifulSoup(driver.page_source, 'html.parser')
+#    driver.find_element_by_css_selector('#gatsby-focus-wrapper > div > div.style__Wrapper-sc-1ynvx8h-0.style__ResponsiveWrapper-sc-1ynvx8h-6.gLoTys.eELrEI > div > nav > div > ol > li:nth-child(2) > button').click()
+#    driver.find_element_by_css_selector('#gatsby-focus-wrapper > div > div.style__Wrapper-sc-1ynvx8h-0.style__ResponsiveWrapper-sc-1ynvx8h-6.gLoTys.eELrEI > div > div.style__Wrapper-sc-106zuld-0.style__ResponsiveWrapper-sc-106zuld-4.dRXdjM.kXYoSI.style__List-sc-1ynvx8h-3.cwQJeW > div > ol > li:nth-child(1) > a > article > div.style__Image-sc-1h41bzo-2.cbzxFR > div > div > img').click()
+
+#    img=soup.find_all("div", attrs={"class":"style__Main-nag7bg-1 bILiti"})
+#    print(img)
+#    embed = discord.Embed(title = "dd",
+#    description = "", color = 3066993)
+#    embed.set_thumbnail(url=img)
+#    embed.add_field(name ="das", value ="세일기간:")
+
+#    await ctx.send(embed = embed) 
+#    driver.quit()
+
+
+
+##과제목록
+#@bot.command()
+#async def 과제목록(ctx):
+#    url=('https://el.koreatech.ac.kr/ilos/main/main_form.acl')
+
+#    try:
+#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+#        driver.implicitly_wait(10)
+#        driver.get(url)
+
+#    except:
+#        await ctx.send(f'실패')
+#        return
+
+#    soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+
+#    yeah=driver.find_element_by_css_selector('#header > div.utillmenu > ul > a > li').click()
+#    driver.find_element_by_css_selector('#usr_id').send_keys('아이디입ㄺ')
+#    driver.find_element_by_css_selector('#usr_pwd').send_keys('비밀번호입력')
+#    driver.find_element_by_css_selector('#login_btn').click()
+#    try:
+#        driver.find_element_by_css_selector('#show_schedule_list').click()
+#    except:
+#        pass
+
+#    name=soup.select_one("#view_0_st_1_2_1475634 > div:nth-child(2) > a > div.schedule_view_title")
+
+#    print(name)
 
 
 
