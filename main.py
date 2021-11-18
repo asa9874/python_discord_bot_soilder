@@ -91,7 +91,7 @@ async def 롤상점(ctx):
     embed = discord.Embed(title = "롤상점",
     description = "", color = 3066993)
     embed.set_thumbnail(url='https://pbs.twimg.com/profile_images/1082741607852519424/U84ElL3m.png')
-    embed.add_field(name = " ", value ="https://store.leagueoflegends.co.kr/")
+    embed.add_field(name = "롤상점", value ="https://store.leagueoflegends.co.kr/")
     await ctx.send(embed = embed) 
 
 
