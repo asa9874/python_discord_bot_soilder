@@ -94,7 +94,15 @@ async def 롤상점(ctx):
     embed.add_field(name = "롤상점", value ="https://store.leagueoflegends.co.kr/")
     await ctx.send(embed = embed) 
 
-
+@bot.command()
+async def join(ctx):
+    if ctx.author.voice and ctx.author.voice.channel:
+    	channel = ctx.author.voice.channel
+    	await channel.connect()
+    else:
+    	await ctx.send("음성채널 없음")
+        
+        
 ##우타
 #@bot.command()
 #async def 우타(ctx):
