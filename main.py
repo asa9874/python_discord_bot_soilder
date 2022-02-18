@@ -30,7 +30,7 @@ options.add_experimental_option('prefs', prefs)
 
 
 
-game= discord.Game("NEW버전 1v 페코라봇")
+game= discord.Game("군인의 삶을 사는중")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 
