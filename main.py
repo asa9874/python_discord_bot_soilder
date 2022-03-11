@@ -41,6 +41,10 @@ bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 #잡다한 말들
 
+@bot.command(aliases=['치카댄스'])
+async def 치카(ctx):
+    await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/cute-anime-dancing-silly-happy-excited-gif-13462237')
+    
 @bot.command(aliases=['콘페코','안녕','반가워','하이','konpeko','안뇽','오하요'])
 async def hello(ctx):
     await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
