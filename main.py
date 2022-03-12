@@ -43,15 +43,15 @@ bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 @bot.command(aliases=['치카댄스'])
 async def 치카(ctx):
-    await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/cute-anime-dancing-silly-happy-excited-gif-13462237')
+    await ctx.send(f'{ctx.author.mention} 치카댅스~ \n https://tenor.com/view/cute-anime-dancing-silly-happy-excited-gif-13462237')
     
 @bot.command(aliases=['콘페코','안녕','반가워','하이','konpeko','안뇽','오하요'])
 async def hello(ctx):
-    await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
+    await ctx.send(f'{ctx.author.mention} 충성! \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
 
 @bot.command(aliases=['병신','병신년','병신페코','ㅄ','ㅂㅅ','병신 페코네'])
 async def beongsin(ctx):
-    await ctx.send(f'병신 페코네 w')
+    await ctx.send(f'병신')
 
 @bot.command(aliases=['페코미코','페미','페코 미코','페코미코대전쟁','페코미코 대전쟁','페코 미코 대전쟁'])
 async def pekomiko(ctx):
@@ -59,7 +59,7 @@ async def pekomiko(ctx):
 
 @bot.command(aliases=['자기소개'])
 async def introduce(ctx):
-    await ctx.send(f'こんぺこ、こんぺこ、こんぺこ！ホロライブ三期生の兎田ぺこらぺこ！どうも、どうも！\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
+    await ctx.send(f'군필여고생 곽호준입ㄴ디ㅏ.\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
 
 #@bot.command(aliases=['닥쳐','시발',])
 #async def 아가리(ctx):
@@ -80,12 +80,12 @@ async def introduce(ctx):
 
 @bot.command(aliases=['슈퍼 네네치'])
 async def 슈퍼네네치(ctx):
-    await ctx.send(f'슈퍼 네네치~')
+    await ctx.send(f'슈퍼 네네치입니다!~')
     await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 @bot.command(aliases=['하이퍼 네네치'])
 async def 하이퍼네네치(ctx):
-    await ctx.send(f'하이퍼 네네치~')
+    await ctx.send(f'하이퍼 네네치입니다!~')
     await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
 
 #롤상점
