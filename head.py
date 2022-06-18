@@ -28,4 +28,4 @@ executable_path= r"/app/.chromedriver/bin/chromedriver", options=options     크
 game= discord.Game("군인의 삶")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
-bot.run('ODg3NzQ4NTcxMzA5NDE2NDY5.GFeEg2.ZbKG2yZmnrC_6Bzx6QUpgRFQNeh_t7SpwDlqvw')
+
