@@ -1,37 +1,13 @@
-import discord
-from discord.ext import commands
-import random
-import requests
-from bs4 import BeautifulSoup
-import os
-
-import selenium
-from selenium import webdriver
-from selenium.webdriver import ActionChains
-
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.ui import Select
-from selenium.webdriver.support.ui import WebDriverWait
-
-import time
+from head import *
+from sadstory import *
 
 
 
 
-# 옵션 생성
-options = webdriver.ChromeOptions()
-# 랙제거
-prefs = {'profile.default_content_setting_values': {'cookies' : 2, 'images': 2, 'plugins' : 2, 'popups': 2, 'geolocation': 2, 'notifications' : 2, 'auto_select_certificate': 2, 'fullscreen' : 2, 'mouselock' : 2, 'mixed_script': 2, 'media_stream' : 2, 'media_stream_mic' : 2, 'media_stream_camera': 2, 'protocol_handlers' : 2, 'ppapi_broker' : 2, 'automatic_downloads': 2, 'midi_sysex' : 2, 'push_messaging' : 2, 'ssl_cert_decisions': 2, 'metro_switch_to_desktop' : 2, 'protected_media_identifier': 2, 'app_banner': 2, 'site_engagement' : 2, 'durable_storage' : 2}}   
-options.add_experimental_option('prefs', prefs)
-#executable_path= r"/app/.chromedriver/bin/chromedriver", options=options     크롬웹드라이버 클라우드할때 넣기
 
 
 
-game= discord.Game("군인의 삶을 사는중")
-bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
+
 
 
 
@@ -41,62 +17,16 @@ bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
 
 #잡다한 말들
 
-@bot.command(aliases=['치카댄스'])
-async def 치카(ctx):
-    await ctx.send(f'{ctx.author.mention} 치카댅스~ \n https://tenor.com/view/cute-anime-dancing-silly-happy-excited-gif-13462237')
-    
-@bot.command(aliases=['콘페코','안녕','반가워','하이','konpeko','안뇽','오하요'])
-async def hello(ctx):
-    await ctx.send(f'{ctx.author.mention} 충성! \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
 
-@bot.command(aliases=['병신','병신년','병신페코','ㅄ','ㅂㅅ','병신 페코네'])
+@bot.command(aliases=['안녕','반가워','하이','안뇽','오하요','야하롱'])
+async def hello(ctx):
+    await ctx.send(f'{ctx.author.mention} 충성!')
+
+@bot.command(aliases=['병신','병신년','ㅄ','ㅂㅅ'])
 async def beongsin(ctx):
     await ctx.send(f'병신')
 
-@bot.command(aliases=['페코미코','페미','페코 미코','페코미코대전쟁','페코미코 대전쟁','페코 미코 대전쟁'])
-async def pekomiko(ctx):
-    await ctx.send(f'https://www.youtube.com/watch?v=m8wUO6XGJH8')
 
-@bot.command(aliases=['자기소개'])
-async def introduce(ctx):
-    await ctx.send(f'군필여고생 곽호준입ㄴ디ㅏ.\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
-
-#@bot.command(aliases=['닥쳐','시발',])
-#async def 아가리(ctx):
-#    await ctx.send(f'말이 너무심해')
-
-#@bot.command(aliases=['야한거',])
-#async def 섹스(ctx):
-#    await ctx.send(f'야한건 안되')
-   
-#@bot.command(aliases=['디버그'])
-#async def debug(ctx):
-#    await ctx.send(f'페코라는 프로그램이 아니야')
-    
-#@bot.command(aliases=['멈춰'])
-#async def stop(ctx):
-#    await ctx.send(f'24시간 영원히 살아가')
-
-
-@bot.command(aliases=['슈퍼 네네치'])
-async def 슈퍼네네치(ctx):
-    await ctx.send(f'슈퍼 네네치입니다!~')
-    await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
-
-@bot.command(aliases=['하이퍼 네네치'])
-async def 하이퍼네네치(ctx):
-    await ctx.send(f'하이퍼 네네치입니다!~')
-    await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
-
-#롤상점
-@bot.command(aliases=['롤 상점'])
-async def 롤상점(ctx):
-
-    embed = discord.Embed(title = "롤상점",
-    description = "", color = 3066993)
-    embed.set_thumbnail(url='https://pbs.twimg.com/profile_images/1082741607852519424/U84ElL3m.png')
-    embed.add_field(name = "롤상점", value ="https://store.leagueoflegends.co.kr/")
-    await ctx.send(embed = embed) 
 
 @bot.command()
 async def join(ctx):
@@ -104,7 +34,7 @@ async def join(ctx):
     	channel = ctx.author.voice.channel
     	await channel.connect()
     else:
-    	await ctx.send("음성채널 없음")
+    	await ctx.send("음성채널 감지 실패")
         
         
 ##우타
@@ -129,14 +59,6 @@ async def join(ctx):
 #    print(aaa)
 
 #    #await ctx.send(aaa)
-
-
-
-
-
-
-
-
 
 
 
@@ -459,7 +381,7 @@ async def 명령어(ctx):
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        embed = discord.Embed(title = "무슨소리인지 모르겠는페코",
+        embed = discord.Embed(title = "무슨소리인지 모르겠는데",
         description = "", color = 0x62c1cc)
         embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
         await ctx.send(embed = embed)
@@ -467,7 +389,7 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_message_delete(message):
 
-    embed = discord.Embed(title = "탐정왓슨이 삭제된 메세지를 찾았습니다.",
+    embed = discord.Embed(title = "탐정이 삭제된 메세지를 찾았습니다.",
     description = "", color = 15844367)
     embed.set_thumbnail(url="https://w.namu.la/s/2a901aac58e0a8898cfb238dd859af4dc55f9b24e79f0006f7aa7523222b8426433aa57f0a3ce14cc6f6d3f47796299075d2700271096ebb9599b32ca895666cc3cc58dd40d33297a0f34e91f2164e833ae044ca40f5985c5ce1cbacf903eb32")
     embed.add_field(name =  "삭제한사람:"+ str(message.author), value ="메세지:"+message.content)
@@ -556,5 +478,3 @@ async def on_message_delete(message):
 
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.YTwFMQ.BJKKpCldBbCz-S4aR5x7wjveYt8')
-
-
