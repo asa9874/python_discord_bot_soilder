@@ -18,6 +18,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 import time
 
+
+
+
 # 옵션 생성
 options = webdriver.ChromeOptions()
 # 랙제거
@@ -25,40 +28,84 @@ prefs = {'profile.default_content_setting_values': {'cookies' : 2, 'images': 2, 
 options.add_experimental_option('prefs', prefs)
 #executable_path= r"/app/.chromedriver/bin/chromedriver", options=options     크롬웹드라이버 클라우드할때 넣기
 
-game= discord.Game("군인의 삶")
+
+
+game= discord.Game("버전 1.78v 페코라봇")
 bot= commands.Bot(command_prefix='!',status=discord.Status.online,activity=game)
+
+
+
+
 
 
 
 #잡다한 말들
 
-
-@bot.command(aliases=['안녕','반가워','하이','안뇽','오하요','야하롱'])
+@bot.command(aliases=['콘페코','안녕','반가워','하이','konpeko','안뇽','오하요'])
 async def hello(ctx):
-    await ctx.send(f'{ctx.author.mention} 충성!')
+    await ctx.send(f'{ctx.author.mention} 콘페코~ \n https://tenor.com/view/pekora-usada-hololive-animation-strut-gif-22386678')
 
-@bot.command(aliases=['병신','병신년','ㅄ','ㅂㅅ'])
+@bot.command(aliases=['병신','병신년','병신페코','ㅄ','ㅂㅅ','병신 페코네'])
 async def beongsin(ctx):
-    await ctx.send(f'병신')
+    await ctx.send(f'병신 페코네 w')
+
+@bot.command(aliases=['페코미코','페미','페코 미코','페코미코대전쟁','페코미코 대전쟁','페코 미코 대전쟁'])
+async def pekomiko(ctx):
+    await ctx.send(f'https://www.youtube.com/watch?v=m8wUO6XGJH8')
+
+@bot.command(aliases=['자기소개'])
+async def introduce(ctx):
+    await ctx.send(f'こんぺこ、こんぺこ、こんぺこ！ホロライブ三期生の兎田ぺこらぺこ！どうも、どうも！\n https://tenor.com/view/pekora-kon-peko-ha-ha-ha-gif-18966253')
+
+#@bot.command(aliases=['닥쳐','시발',])
+#async def 아가리(ctx):
+#    await ctx.send(f'말이 너무심해')
+
+#@bot.command(aliases=['야한거',])
+#async def 섹스(ctx):
+#    await ctx.send(f'야한건 안되')
+   
+#@bot.command(aliases=['디버그'])
+#async def debug(ctx):
+#    await ctx.send(f'페코라는 프로그램이 아니야')
+    
+#@bot.command(aliases=['멈춰'])
+#async def stop(ctx):
+#    await ctx.send(f'24시간 영원히 살아가')
+
+
+@bot.command(aliases=['슈퍼 네네치'])
+async def 슈퍼네네치(ctx):
+    await ctx.send(f'슈퍼 네네치~')
+    await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
+
+@bot.command(aliases=['하이퍼 네네치'])
+async def 하이퍼네네치(ctx):
+    await ctx.send(f'하이퍼 네네치~')
+    await ctx.send(f'https://tenor.com/view/kon-nene-matanene-nene-nenechi-nene-seal-gif-21412185')
+
+#롤상점
+@bot.command(aliases=['롤 상점'])
+async def 롤상점(ctx):
+
+    embed = discord.Embed(title = "롤상점",
+    description = "", color = 3066993)
+    embed.set_thumbnail(url='https://pbs.twimg.com/profile_images/1082741607852519424/U84ElL3m.png')
+    embed.add_field(name = "롤상점", value ="https://store.leagueoflegends.co.kr/")
+    await ctx.send(embed = embed) 
 
 
 
-@bot.command()
-async def join(ctx):
-    if ctx.author.voice and ctx.author.voice.channel:
-    	channel = ctx.author.voice.channel
-    	await channel.connect()
-    else:
-    	await ctx.send("음성채널 감지 실패")
-        
-        
+
+
+
 ##우타
 #@bot.command()
 #async def 우타(ctx):
 #    url=('https://www.youtube.com/playlist?list=PLet0wKVboCzEMtX-hZQn1obu40HWVKn7q')
 
 #    try:
-#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+#        driver=webdriver.Chrome()
 #        driver.implicitly_wait(10)
 #        driver.get(url)
 
@@ -78,13 +125,21 @@ async def join(ctx):
 
 
 
+
+
+
+
+
+
+
+
 #steamsale
 @bot.command()
 async def 스팀세일(ctx):
     url=('https://steamsale.windbell.co.kr/Next')
 
     try:
-        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+        driver=webdriver.Chrome()
         driver.implicitly_wait(10)
         driver.get(url)
 
@@ -134,7 +189,7 @@ async def dc(ctx,text):
 
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -152,13 +207,21 @@ async def dc(ctx,text):
     driver.quit()
 
 
+@bot.command()
+async def join(ctx):
+    if ctx.author.voice and ctx.author.voice.channel:
+    	channel = ctx.author.voice.channel
+    	await channel.connect()
+    else:
+    	await ctx.send("음성채널 없음")
+
 
 
 #hololive 구독자
 @bot.command(aliases=['hololive','홀로라이브구독자','hololive구독자'])
 async def 홀로라이브(ctx):
     url=(f'https://trackholo.live/en/')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -191,7 +254,7 @@ async def 홀로라이브(ctx):
 @bot.command(aliases=['페코라 수익','페코라 정보','페코라 채널','페코라정보','페코라채널'])
 async def 페코라수익(ctx):
     url=(f'https://playboard.co/channel/UC1DCedRgGHBdm81E1llLhOQ')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -239,7 +302,7 @@ async def 나무위키(ctx,*,text):
     url=(f'https://namu.wiki/w/'+text)
 
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -270,7 +333,7 @@ async def 나무위키(ctx,*,text):
 async def search(ctx,*,text):
     url=(f'https://www.op.gg/summoner/userName='+text)
 
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -339,7 +402,7 @@ async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome()
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -396,7 +459,7 @@ async def 명령어(ctx):
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
-        embed = discord.Embed(title = "무슨소리인지 모르겠는데",
+        embed = discord.Embed(title = "무슨소리인지 모르겠는페코",
         description = "", color = 0x62c1cc)
         embed.add_field(name = "명령어 목록", value = "!명령어로 확인")
         await ctx.send(embed = embed)
@@ -404,7 +467,7 @@ async def on_command_error(ctx, error):
 @bot.event
 async def on_message_delete(message):
 
-    embed = discord.Embed(title = "탐정이 삭제된 메세지를 찾았습니다.",
+    embed = discord.Embed(title = "탐정왓슨이 삭제된 메세지를 찾았습니다.",
     description = "", color = 15844367)
     embed.set_thumbnail(url="https://w.namu.la/s/2a901aac58e0a8898cfb238dd859af4dc55f9b24e79f0006f7aa7523222b8426433aa57f0a3ce14cc6f6d3f47796299075d2700271096ebb9599b32ca895666cc3cc58dd40d33297a0f34e91f2164e833ae044ca40f5985c5ce1cbacf903eb32")
     embed.add_field(name =  "삭제한사람:"+ str(message.author), value ="메세지:"+message.content)
@@ -437,7 +500,7 @@ async def on_message_delete(message):
 #    url=('https://www.leagueoflegends.com/ko-kr/news/game-updates/')
 
 #    try:
-#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+#        driver=webdriver.Chrome()
 #        driver.implicitly_wait(10)
 #        driver.get(url)
 
@@ -466,7 +529,7 @@ async def on_message_delete(message):
 #    url=('https://el.koreatech.ac.kr/ilos/main/main_form.acl')
 
 #    try:
-#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+#        driver=webdriver.Chrome()
 #        driver.implicitly_wait(10)
 #        driver.get(url)
 
@@ -489,8 +552,6 @@ async def on_message_delete(message):
 #    name=soup.select_one("#view_0_st_1_2_1475634 > div:nth-child(2) > a > div.schedule_view_title")
 
 #    print(name)
-
-
 
 
 bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.GzpnWM.Nf5t2ac6AepcbXzBSMVcEca5saJkSaS-kNHDVE')
