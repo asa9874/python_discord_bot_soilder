@@ -18,3 +18,4 @@ typing-extensions
 urllib3
 yarl
 selenium
+PyNaCl
