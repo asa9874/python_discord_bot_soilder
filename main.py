@@ -475,5 +475,5 @@ async def on_message_delete(message):
 
 #    print(name)
 
-
+bot.run('ODg3NzQ4NTcxMzA5NDE2NDY5.GFeEg2.ZbKG2yZmnrC_6Bzx6QUpgRFQNeh_t7SpwDlqvw')
 
