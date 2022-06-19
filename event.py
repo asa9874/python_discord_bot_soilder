@@ -12,12 +12,12 @@ async def on_command_error(ctx, error):
         embed.add_field(name = " ", value = " ")
         await ctx.send(embed = embed)
 
-@bot.event
-async def on_message_delete(message):
+#@bot.event
+#async def on_message_delete(message):
 
-    embed = discord.Embed(title = "굳건이가 삭제된 메세지를 찾았습니다.",
-    description = "", color = 15844367)
-    embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/commons/e/eb/Military_Manpower_Administration_Gutgeoni1.png")
-    embed.add_field(name =  "삭제한메세지주인:"+ str(message.author), value ="메세지:"+message.content)
-    await message.channel.send(embed=embed)
-    return
+#    embed = discord.Embed(title = "굳건이가 삭제된 메세지를 찾았습니다.",
+#    description = "", color = 15844367)
+#    embed.set_thumbnail(url="https://upload.wikimedia.org/wikipedia/commons/e/eb/Military_Manpower_Administration_Gutgeoni1.png")
+#    embed.add_field(name =  "삭제한메세지주인:"+ str(message.author), value ="메세지:"+message.content)
+#    await message.channel.send(embed=embed)
+#    return
