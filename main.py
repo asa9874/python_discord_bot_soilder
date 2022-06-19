@@ -478,4 +478,4 @@ async def on_message_delete(message):
 
 
 
-bot.run('ODg3NzQ4NTcxMzA5NDE2NDY5.GFeEg2.ZbKG2yZmnrC_6Bzx6QUpgRFQNeh_t7SpwDlqvw')
+bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.GzpnWM.Nf5t2ac6AepcbXzBSMVcEca5saJkSaS-kNHDVE')
