@@ -32,9 +32,11 @@ async def 군대(ctx,*,text):
         embed.set_thumbnail(url='https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Military_Manpower_Administration_Gutgeoni1.png/200px-Military_Manpower_Administration_Gutgeoni1.png')
        
         
-        if(lasttime> timedelta(days=546)):
+        if(lasttime>= timedelta(days=546)):
             deadtime=lasttime-timedelta(days=546)
             embed.add_field(name ='남은입대일',value =str(deadtime))
+        else:
+            embed.add_field(name ='고통받은 날',value ="+"+str(timedelta(days=546)-lasttime))
         embed.add_field(name ='전역일',value =str(endtime.year)+"년"+str(endtime.month)+"월"+str(endtime.day)+"일",inline=False)
         embed.add_field(name ='남은전역일',value =str(happytime))
         await ctx.send(embed = embed) 
