@@ -17,7 +17,7 @@ async def 날씨(ctx,*,text):
 
 
     url=(f'https://www.google.com/search?q='+text+'날씨')
-    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
+    driver=webdriver.Chrome(executable_path= r"chromedriver", options=options)
     driver.implicitly_wait(10)
     driver.get(url)
 
@@ -26,13 +26,11 @@ async def 날씨(ctx,*,text):
     Weather_img=soup.select_one('#wob_tci')['src']
     Weather_rain=soup.select_one('#wob_pp').text
     Weather_water=soup.select_one('#wob_hm').text
-
-
-
+    Weather_tem=soup.select_one('#wob_tm').text
     embed = discord.Embed(title = text+"의 날씨",
     description = "", color = 0x62c1cc)
     embed.set_thumbnail(url="http:" + Weather_img)
-    embed.add_field(name =  "비올확률:"+Weather_rain, value ="습도:"+Weather_water)
+    embed.add_field(name =  "비올확률:"+Weather_rain, value ="습도:"+Weather_water+"온도"+ Weather_tem+"도")
     await ctx.send(embed = embed)
     driver.quit()
 
