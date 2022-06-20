@@ -1,7 +1,5 @@
 from head import *
 
-
-
 @bot.command(aliases=['안녕','반가워','하이','안뇽','오하요','야하롱'])
 async def hello(ctx):
     await ctx.send(f'{ctx.author.mention} 충성!')
@@ -9,6 +7,37 @@ async def hello(ctx):
 @bot.command(aliases=['병신','병신년','ㅄ','ㅂㅅ'])
 async def beongsin(ctx):
     await ctx.send(f'병신')
+
+@bot.command("날군인으로해줘")
+async def rename(ctx):
+    try:
+        await ctx.author.edit(nick="군인")
+    except:
+        await ctx.send(f'관리자는 못바꿔')
+
+
+@bot.command('들어와')
+async def join(ctx):
+    try:
+        if ctx.author.voice and ctx.author.voice.channel:
+    	    channel = ctx.author.voice.channel
+    	    await channel.connect()
+    except:
+    	await ctx.send("음성채널 감지 실패")
+
+
+
+@bot.command('월급')
+async def money(ctx):
+    embed = discord.Embed(title = "<2022년도 군인 월급>",
+    description = "", color = 0x62c1cc)
+    embed.set_thumbnail(url="https://pbs.twimg.com/media/EM7weQeU0AA3Qkk.png")
+    embed.add_field(name =  "◆이병◆", value ="510,089원",inline=False)
+    embed.add_field(name =  "◆일병◆", value ="552,023원",inline=False)
+    embed.add_field(name =  "◆상병◆", value ="610,183원",inline=False)
+    embed.add_field(name =  "◆병장◆", value ="676,115원",inline=False)
+    await ctx.send(embed = embed)
+
 
 
 #날씨
@@ -42,3 +71,4 @@ async def 명령어(ctx):
     description = "", color = 0x62c1cc)
     embed.add_field(name = "없어", value = "없어",inline=False)
     await ctx.send(embed = embed)
+
