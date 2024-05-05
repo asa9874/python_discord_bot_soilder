@@ -5,4 +5,4 @@ from event import *
 
 
 
-bot.run('ODg2MDU5NDc4MzU1Njg5NjAz.GzpnWM.Nf5t2ac6AepcbXzBSMVcEca5saJkSaS-kNHDVE')
+bot.run('키')
