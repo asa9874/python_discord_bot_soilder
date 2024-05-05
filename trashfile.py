@@ -119,36 +119,6 @@
 
 
 
-##과제목록
-#@bot.command()
-#async def 과제목록(ctx):
-#    url=('https://el.koreatech.ac.kr/ilos/main/main_form.acl')
-
-#    try:
-#        driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
-#        driver.implicitly_wait(10)
-#        driver.get(url)
-
-#    except:
-#        await ctx.send(f'실패')
-#        return
-
-#    soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-
-#    yeah=driver.find_element_by_css_selector('#header > div.utillmenu > ul > a > li').click()
-#    driver.find_element_by_css_selector('#usr_id').send_keys('아이디입ㄺ')
-#    driver.find_element_by_css_selector('#usr_pwd').send_keys('비밀번호입력')
-#    driver.find_element_by_css_selector('#login_btn').click()
-#    try:
-#        driver.find_element_by_css_selector('#show_schedule_list').click()
-#    except:
-#        pass
-
-#    name=soup.select_one("#view_0_st_1_2_1475634 > div:nth-child(2) > a > div.schedule_view_title")
-
-#    print(name)
-
 
 ##코로나
 #@bot.command(aliases=['코로나','코로나확진자','확진자수','코로나 확진자','코로나수'])
@@ -166,6 +136,7 @@
 #    description = "", color = 0x62c1cc)
 #    embed.add_field(name = "총 확진자:"+"`"+total+"`", value ="오늘:"+"`"+num+"`")
 #    await ctx.send(embed = embed)
+
 
 ##우타
 #@bot.command()
@@ -227,40 +198,6 @@
 #    driver.quit()
 
 
-
-#dc하기
-#@bot.command(aliases=['디씨인사이드','디씨'])
-#async def dc(ctx,text):
-
-
-#    if text in '싱글벙글':
-#        url=('https://gall.dcinside.com/mgallery/board/lists?id=singlebungle1472&exception_mode=recommend')
-#    elif text in '키즈나':
-#        url=('https://gall.dcinside.com/mgallery/board/lists?id=kizunaai&exception_mode=recommend')
-#    elif text in '몸매':
-#        url=('https://gall.dcinside.com/mgallery/board/lists?id=beautifulbody&exception_mode=recommend')
-#    else:
-#        await ctx.send(f'갤러리실패')
-#        return
-
-
-
-#    driver=webdriver.Chrome(executable_path= r"/app/.chromedriver/bin/chromedriver", options=options)
-#    driver.implicitly_wait(10)
-#    driver.get(url)
-
-#    soup = BeautifulSoup(driver.page_source, 'html.parser')
-
-
-#    name=soup.findAll("td", attrs={"class":"gall_tit ub-word"})
-   
-#    embed = discord.Embed(title = "`개념글`",
-#    description = "", color = 3066993)
-#    embed.set_thumbnail(url='https://static-s.aa-cdn.net/img/gp/20600005506263/VP6qsU103YOgbP_xEJhUg77FoWDIhiWOjW6YJ9BxxZpYcCzo_TJnBQhTGs5eoPGsxKI=s300?v=1')
-#    for i in range(0,10):
-#        embed.add_field(name =name[i].getText().replace('\n',''), value = f'https://gall.dcinside.com/'+name[i].find('a').get('href'),inline=False)
-#    await ctx.send(embed = embed)
-#    driver.quit()
 
 
 
