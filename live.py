@@ -4,10 +4,6 @@ from head import *
 async def hello(ctx):
     await ctx.send(f'{ctx.author.mention} 충성!')
 
-@bot.command(aliases=['병신','병신년','ㅄ','ㅂㅅ'])
-async def beongsin(ctx):
-    await ctx.send(f'병신')
-
 @bot.command("날군인으로해줘")
 async def rename(ctx):
     try:
